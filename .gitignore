@@ -216,3 +216,8 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# temporary files
+.DS_Store
+simulation.py
+node_modules/

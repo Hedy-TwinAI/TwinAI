@@ -1,0 +1,423 @@
+"""
+<MODEL NAME> digital twin.
+
+Scenario:
+<Entities> arrive at <the system> and are served by a pool of <servers>
+(a single SimPy Resource with capacity = num_servers).
+
+Arrivals follow a Poisson process (exponential interarrival times) and service
+times are exponential. If a server is free the entity is served immediately;
+otherwise it waits in a FIFO queue.
+
+Run policy (terminating simulation):
+    Arrivals stop at `horizon`, then the simulation drains -- every admitted
+    entity is served to completion. Cmax is therefore the moment the last
+    entity leaves, and no entity's wait is truncated by the end of the run.
+    Because the run terminates, no warm-up period is dropped: replication
+    means estimate the full-period mean, transient included.
+
+    For a STEADY-STATE study instead, discard a warm-up period before
+    collecting statistics -- see references/kpis.md.
+
+Knobs (inputs):
+    arrival_rate        entities per <time unit> (lambda)
+    num_servers         number of parallel servers
+    mean_service_time   average <time units> per entity (1/mu)
+    horizon             <time units> during which arrivals occur
+
+KPIs (outputs), per replication and aggregated across replications:
+    utilization, throughput, Cmax, avg/max/p95 wait, avg/max queue length,
+    avg/max WIP, avg sojourn time
+
+Time-weighted quantities (queue length, WIP) are integrated over time, not
+averaged over entities. Utilization and throughput use Cmax as the
+denominator; `horizon` is also exported so a dashboard can renormalise.
+
+Usage:
+    python template.py --reps 50 --out results.json
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import math
+import random
+import statistics
+from dataclasses import dataclass
+from datetime import datetime, timezone
+
+import simpy
+
+
+@dataclass
+class EntityRecord:
+    """One entity's journey through the system."""
+
+    id: int
+    arrival_time: float
+    start_time: float
+    end_time: float
+    service_time: float
+
+    @property
+    def wait_time(self) -> float:
+        """Time spent queueing before a server picked it up."""
+        return self.start_time - self.arrival_time
+
+    @property
+    def sojourn_time(self) -> float:
+        """Total time in the system (queue + service)."""
+        return self.end_time - self.arrival_time
+
+
+class Model:
+    """A single replication of the system."""
+
+    def __init__(
+        self,
+        arrival_rate: float,
+        num_servers: int,
+        mean_service_time: float,
+        horizon: float,
+        seed: int,
+        verbose: bool = False,
+    ):
+        if arrival_rate <= 0:
+            raise ValueError("arrival_rate must be > 0")
+        if num_servers < 1:
+            raise ValueError("num_servers must be >= 1")
+        if mean_service_time <= 0:
+            raise ValueError("mean_service_time must be > 0")
+        if horizon <= 0:
+            raise ValueError("horizon must be > 0")
+
+        self.arrival_rate = arrival_rate
+        self.num_servers = num_servers
+        self.mean_service_time = mean_service_time
+        self.horizon = horizon
+        self.seed = seed
+        self.verbose = verbose
+
+        # Each replication owns its RNG stream, so runs are independent of
+        # each other and of module-level `random` state -- and reproducible.
+        self.rng = random.Random(seed)
+
+        self.env = simpy.Environment()
+        self.servers = simpy.Resource(self.env, capacity=num_servers)
+        self.records: list[EntityRecord] = []
+
+        # Accumulators for time-weighted averages.
+        self._last_t = 0.0
+        self._n_queue = 0
+        self._n_system = 0
+        self._area_queue = 0.0
+        self._area_wip = 0.0
+        self._max_queue = 0
+        self._max_wip = 0
+        self._busy_time = 0.0
+
+    # ------------------------------------------------------------------
+    # Statistics plumbing
+    # ------------------------------------------------------------------
+
+    def _advance(self) -> None:
+        """Integrate the counters over the interval since the last change.
+
+        Call this *before* mutating _n_queue / _n_system so the elapsed
+        interval is credited to the occupancy levels that actually held
+        during it. Every new event type you add must call this too, or its
+        interval silently vanishes from the time-weighted averages.
+        """
+        dt = self.env.now - self._last_t
+        if dt > 0:
+            self._area_queue += self._n_queue * dt
+            self._area_wip += self._n_system * dt
+        self._last_t = self.env.now
+
+    # ------------------------------------------------------------------
+    # Processes
+    # ------------------------------------------------------------------
+
+    def entity(self, eid: int):
+        arrival_time = self.env.now
+        self._advance()
+        self._n_queue += 1
+        self._n_system += 1
+        self._max_queue = max(self._max_queue, self._n_queue)
+        self._max_wip = max(self._max_wip, self._n_system)
+        if self.verbose:
+            print(f"Entity {eid} arrives at {arrival_time:.2f}")
+
+        with self.servers.request() as req:
+            yield req
+
+            start_time = self.env.now
+            self._advance()
+            self._n_queue -= 1
+            if self.verbose:
+                print(f"Entity {eid} starts service at {start_time:.2f}")
+
+            service_time = self.rng.expovariate(1.0 / self.mean_service_time)
+            self._busy_time += service_time
+            yield self.env.timeout(service_time)
+
+            end_time = self.env.now
+            self._advance()
+            self._n_system -= 1
+            if self.verbose:
+                print(f"Entity {eid} leaves at {end_time:.2f}")
+
+        self.records.append(
+            EntityRecord(eid, arrival_time, start_time, end_time, service_time)
+        )
+
+    def arrivals(self):
+        """Poisson arrivals until the system stops admitting entities.
+
+        `expovariate` takes a RATE. If your parameter is a mean gap instead,
+        pass expovariate(1.0 / mean_gap) -- getting this backwards scales the
+        offered load by the square of the parameter and raises no error.
+        """
+        eid = 0
+        while True:
+            yield self.env.timeout(self.rng.expovariate(self.arrival_rate))
+            if self.env.now >= self.horizon:
+                break
+            eid += 1
+            self.env.process(self.entity(eid))
+
+    # ------------------------------------------------------------------
+    # Run + KPIs
+    # ------------------------------------------------------------------
+
+    def run(self) -> dict:
+        self.env.process(self.arrivals())
+        self.env.run()  # no `until` -> let every admitted entity finish
+        self._advance()  # flush the final interval
+        return self.kpis()
+
+    def kpis(self) -> dict:
+        n = len(self.records)
+        if n == 0:
+            return {
+                "entities_served": 0,
+                "cmax": 0.0,
+                "utilization": 0.0,
+                "throughput": 0.0,
+                "avg_wait": 0.0,
+                "max_wait": 0.0,
+                "p95_wait": 0.0,
+                "avg_queue_length": 0.0,
+                "max_queue_length": 0,
+                "avg_wip": 0.0,
+                "max_wip": 0,
+                "avg_sojourn": 0.0,
+            }
+
+        cmax = max(r.end_time for r in self.records)
+        waits = [r.wait_time for r in self.records]
+        sojourns = [r.sojourn_time for r in self.records]
+
+        return {
+            "entities_served": n,
+            "cmax": cmax,
+            # Busy server-time over available server-time.
+            "utilization": self._busy_time / (self.num_servers * cmax),
+            "throughput": n / cmax,
+            "avg_wait": statistics.fmean(waits),
+            "max_wait": max(waits),
+            "p95_wait": _percentile(waits, 0.95),
+            # Time-weighted, not per-entity.
+            "avg_queue_length": self._area_queue / cmax,
+            "max_queue_length": self._max_queue,
+            "avg_wip": self._area_wip / cmax,
+            "max_wip": self._max_wip,
+            "avg_sojourn": statistics.fmean(sojourns),
+        }
+
+    def validate(self) -> dict:
+        """Little's law check: L should equal lambda_eff * W.
+
+        Both sides come from the same run, so agreement should be near
+        machine precision. A visible error means an accumulator is missing
+        a change point.
+        """
+        k = self.kpis()
+        if k["entities_served"] == 0:
+            return {"littles_law_l": 0.0, "littles_law_lambda_w": 0.0, "abs_error": 0.0}
+        lhs = k["avg_wip"]
+        rhs = k["throughput"] * k["avg_sojourn"]
+        return {
+            "littles_law_l": lhs,
+            "littles_law_lambda_w": rhs,
+            "abs_error": abs(lhs - rhs),
+        }
+
+
+def _percentile(values: list[float], q: float) -> float:
+    """Linear-interpolated percentile (numpy's default method)."""
+    if not values:
+        return 0.0
+    ordered = sorted(values)
+    if len(ordered) == 1:
+        return ordered[0]
+    pos = q * (len(ordered) - 1)
+    lo = math.floor(pos)
+    hi = math.ceil(pos)
+    return ordered[lo] + (ordered[hi] - ordered[lo]) * (pos - lo)
+
+
+def summarize(values: list[float]) -> dict:
+    """Mean plus a 95% confidence interval across replications.
+
+    Uses the normal approximation for the CI, which is why the default
+    replication count is >= 30.
+    """
+    n = len(values)
+    mean = statistics.fmean(values)
+    if n < 2:
+        return {
+            "mean": mean,
+            "stdev": 0.0,
+            "ci95_half_width": 0.0,
+            "ci95_low": mean,
+            "ci95_high": mean,
+            "min": mean,
+            "max": mean,
+        }
+    sd = statistics.stdev(values)
+    half = statistics.NormalDist().inv_cdf(0.975) * sd / math.sqrt(n)
+    return {
+        "mean": mean,
+        "stdev": sd,
+        "ci95_half_width": half,
+        "ci95_low": mean - half,
+        "ci95_high": mean + half,
+        "min": min(values),
+        "max": max(values),
+    }
+
+
+def run_experiment(
+    arrival_rate: float,
+    num_servers: int,
+    mean_service_time: float,
+    horizon: float,
+    reps: int,
+    seed: int,
+    verbose: bool = False,
+) -> dict:
+    """Run `reps` independent replications and aggregate the KPIs."""
+    # Draw each replication's seed from a master stream so the whole
+    # experiment is reproducible from one number and streams don't overlap.
+    master = random.Random(seed)
+    seeds = [master.randrange(2**32) for _ in range(reps)]
+
+    per_rep = []
+    validations = []
+    for i, rep_seed in enumerate(seeds):
+        sim = Model(
+            arrival_rate=arrival_rate,
+            num_servers=num_servers,
+            mean_service_time=mean_service_time,
+            horizon=horizon,
+            seed=rep_seed,
+            verbose=verbose and i == 0,  # only trace the first replication
+        )
+        result = sim.run()
+        per_rep.append({"replication": i, "seed": rep_seed, **result})
+        validations.append(sim.validate()["abs_error"])
+
+    kpi_names = [k for k in per_rep[0] if k not in ("replication", "seed")]
+    summary = {name: summarize([r[name] for r in per_rep]) for name in kpi_names}
+
+    offered_load = arrival_rate * mean_service_time / num_servers
+
+    return {
+        "model": "Model",
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "config": {
+            "arrival_rate": arrival_rate,
+            "mean_interarrival": 1.0 / arrival_rate,
+            "num_servers": num_servers,
+            "mean_service_time": mean_service_time,
+            "horizon": horizon,
+            "replications": reps,
+            "master_seed": seed,
+            "offered_load_rho": offered_load,
+            "stable": offered_load < 1.0,
+        },
+        "summary": summary,
+        "replications": per_rep,
+        "validation": {
+            "littles_law_max_abs_error": max(validations),
+            "note": "L vs lambda_eff * W across replications; near zero means "
+            "the time-weighted accumulators agree with the entity records.",
+        },
+    }
+
+
+def _round(obj, ndigits: int = 6):
+    """Recursively round floats so the exported JSON stays readable."""
+    if isinstance(obj, float):
+        return round(obj, ndigits)
+    if isinstance(obj, dict):
+        return {k: _round(v, ndigits) for k, v in obj.items()}
+    if isinstance(obj, list):
+        return [_round(v, ndigits) for v in obj]
+    return obj
+
+
+def parse_args() -> argparse.Namespace:
+    p = argparse.ArgumentParser(description="Discrete-event simulation model")
+    p.add_argument("--arrival-rate", type=float, default=0.5,
+                   help="entities per time unit (default: 0.5)")
+    p.add_argument("--num-servers", type=int, default=2)
+    p.add_argument("--mean-service-time", type=float, default=3.0,
+                   help="average time units per entity")
+    p.add_argument("--horizon", type=float, default=480.0,
+                   help="time units during which entities arrive")
+    p.add_argument("--reps", type=int, default=50,
+                   help="number of independent replications")
+    p.add_argument("--seed", type=int, default=42, help="master seed")
+    p.add_argument("--out", default="results.json",
+                   help="path for the exported JSON")
+    p.add_argument("--verbose", action="store_true",
+                   help="print an event trace for the first replication")
+    return p.parse_args()
+
+
+def main() -> None:
+    args = parse_args()
+    results = run_experiment(
+        arrival_rate=args.arrival_rate,
+        num_servers=args.num_servers,
+        mean_service_time=args.mean_service_time,
+        horizon=args.horizon,
+        reps=args.reps,
+        seed=args.seed,
+        verbose=args.verbose,
+    )
+
+    with open(args.out, "w") as f:
+        json.dump(_round(results), f, indent=2)
+
+    cfg = results["config"]
+    s = results["summary"]
+    print(f"{results['model']}: {cfg['replications']} replications, "
+          f"rho={cfg['offered_load_rho']:.2f}"
+          f"{'' if cfg['stable'] else '  *** UNSTABLE (rho >= 1) ***'}")
+    print(f"{'KPI':<20}{'mean':>10}  {'95% CI':>22}")
+    for name in ("utilization", "throughput", "cmax", "avg_wait", "max_wait",
+                 "p95_wait", "avg_queue_length", "avg_wip", "entities_served"):
+        st = s[name]
+        ci = f"[{st['ci95_low']:.3f}, {st['ci95_high']:.3f}]"
+        print(f"{name:<20}{st['mean']:>10.3f}  {ci:>22}")
+    print(f"\nLittle's law max abs error: "
+          f"{results['validation']['littles_law_max_abs_error']:.2e}")
+    print(f"Wrote {args.out}")
+
+
+if __name__ == "__main__":
+    main()
