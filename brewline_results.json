@@ -1,6 +1,6 @@
 {
   "model": "BrewLine",
-  "generated_at": "2026-08-20T00:55:57.483400+00:00",
+  "generated_at": "2026-08-21T00:57:19.341075+00:00",
   "config": {
     "arrival_rate_per_min": 0.5,
     "mean_interarrival_min": 2.0,
@@ -122,6 +122,6191 @@
       "max": 13.45381
     }
   },
+  "resource_kpis": {
+    "num_baristas": 2,
+    "utilization_by_barista": [
+      {
+        "mean": 0.748584,
+        "stdev": 0.051707,
+        "ci95_half_width": 0.014332,
+        "ci95_low": 0.734251,
+        "ci95_high": 0.762916,
+        "min": 0.653504,
+        "max": 0.884267
+      },
+      {
+        "mean": 0.757452,
+        "stdev": 0.059598,
+        "ci95_half_width": 0.01652,
+        "ci95_low": 0.740933,
+        "ci95_high": 0.773972,
+        "min": 0.580106,
+        "max": 0.843537
+      }
+    ]
+  },
+  "trace": [
+    {
+      "t": 0,
+      "event": "start",
+      "queue_len": 0,
+      "wip": 0,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 4.927723,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 1,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 4.927723,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 5.849565,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 5.849565,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 6.773943,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 7.786547,
+      "event": "departure",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 7.786547,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 7.81053,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 8.436269,
+      "event": "arrival",
+      "queue_len": 2,
+      "wip": 4,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 8.866592,
+      "event": "departure",
+      "queue_len": 2,
+      "wip": 3,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 8.866592,
+      "event": "service_start",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 9.523901,
+      "event": "departure",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 9.523901,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 9.573741,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 12.139146,
+      "event": "arrival",
+      "queue_len": 2,
+      "wip": 4,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 12.295879,
+      "event": "departure",
+      "queue_len": 2,
+      "wip": 3,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 12.295879,
+      "event": "service_start",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 13.408953,
+      "event": "departure",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 13.408953,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 13.466545,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 14.366618,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 0,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 14.698128,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 1,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 14.698128,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 15.337371,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 15.337371,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 16.672669,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 18.361072,
+      "event": "departure",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 18.361072,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 19.551839,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 21.419917,
+      "event": "departure",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 21.419917,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 24.069982,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 24.751302,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 24.751302,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 26.418451,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 26.684855,
+      "event": "departure",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 26.684855,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 27.07655,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 28.403978,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 0,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 30.553244,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 1,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 30.553244,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 32.669349,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 0,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 34.230216,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 1,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 34.230216,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 34.377086,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 34.377086,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 35.024843,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 35.225773,
+      "event": "departure",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 35.225773,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 37.325104,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 37.451107,
+      "event": "arrival",
+      "queue_len": 2,
+      "wip": 4,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 37.639782,
+      "event": "departure",
+      "queue_len": 2,
+      "wip": 3,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 37.639782,
+      "event": "service_start",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 40.098777,
+      "event": "departure",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 40.098777,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 40.559769,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 41.662315,
+      "event": "departure",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 41.662315,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 43.251808,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 43.827663,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 43.827663,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 44.068793,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 44.536032,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 44.536032,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 44.828275,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 44.843245,
+      "event": "departure",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 44.843245,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 44.854062,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 45.576106,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 45.576106,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 49.619639,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 50.888451,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 0,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 52.738108,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 1,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 52.738108,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 53.581797,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 53.581797,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 54.561769,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 56.380458,
+      "event": "departure",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 56.380458,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 56.435776,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 56.777303,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 56.777303,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 57.292735,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 59.46852,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 59.46852,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 59.677156,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 60.402143,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 60.402143,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 62.118906,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 62.195122,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 62.195122,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 62.939148,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 63.086808,
+      "event": "departure",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 63.086808,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 63.748435,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 64.483316,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 64.483316,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 64.589175,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 64.691166,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 0,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 64.889403,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 1,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 64.889403,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 65.582281,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 0,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 67.508591,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 1,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 67.508591,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 68.463572,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 68.463572,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 68.68094,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 70.401814,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 70.401814,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 74.254948,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 74.706908,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 74.706908,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 75.955655,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 76.875508,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 76.875508,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 78.171421,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 78.443382,
+      "event": "departure",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 78.443382,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 79.451737,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 80.882875,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 0,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 85.539711,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 1,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 85.539711,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 85.614865,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 85.614865,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 86.353749,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 88.031608,
+      "event": "departure",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 88.031608,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 88.831301,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 92.92507,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 92.92507,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 92.990017,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 95.336761,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 95.336761,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 96.250781,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 97.705264,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 0,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 97.834285,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 1,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 97.834285,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 102.017069,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 102.017069,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 102.415414,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 103.19399,
+      "event": "departure",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 103.19399,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 103.403099,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 103.600712,
+      "event": "arrival",
+      "queue_len": 2,
+      "wip": 4,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 105.596585,
+      "event": "departure",
+      "queue_len": 2,
+      "wip": 3,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 105.596585,
+      "event": "service_start",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 106.541191,
+      "event": "arrival",
+      "queue_len": 2,
+      "wip": 4,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 106.933428,
+      "event": "departure",
+      "queue_len": 2,
+      "wip": 3,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 106.933428,
+      "event": "service_start",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 110.258318,
+      "event": "arrival",
+      "queue_len": 2,
+      "wip": 4,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 110.692092,
+      "event": "departure",
+      "queue_len": 2,
+      "wip": 3,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 110.692092,
+      "event": "service_start",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 111.0525,
+      "event": "departure",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 111.0525,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 111.845915,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 114.191764,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 0,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 116.603641,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 1,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 116.603641,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 116.682221,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 116.682221,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 117.187964,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 120.292202,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 120.292202,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 121.903817,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 123.266475,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 123.266475,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 123.297198,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 124.216874,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 124.216874,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 124.343581,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 124.91136,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 124.91136,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 127.741692,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 128.579215,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 0,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 130.034923,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 1,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 130.034923,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 130.084424,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 0,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 130.27371,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 1,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 130.27371,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 130.757195,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 0,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 134.159538,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 1,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 134.159538,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 134.206734,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 0,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 135.452838,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 1,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 135.452838,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 136.547414,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 0,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 142.135429,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 1,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 142.135429,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 142.696067,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 142.696067,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 142.756764,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 144.441689,
+      "event": "departure",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 144.441689,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 145.208128,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 146.225513,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 0,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 148.987189,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 1,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 148.987189,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 149.780305,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 0,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 151.610099,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 1,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 151.610099,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 152.397979,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 0,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 154.022472,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 1,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 154.022472,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 154.83943,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 0,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 155.438018,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 1,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 155.438018,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 156.569994,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 0,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 158.536925,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 1,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 158.536925,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 160.260023,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 160.260023,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 160.542974,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 161.073153,
+      "event": "departure",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 161.073153,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 162.468376,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 164.637654,
+      "event": "arrival",
+      "queue_len": 2,
+      "wip": 4,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 166.240034,
+      "event": "arrival",
+      "queue_len": 3,
+      "wip": 5,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 166.568852,
+      "event": "departure",
+      "queue_len": 3,
+      "wip": 4,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 166.568852,
+      "event": "service_start",
+      "queue_len": 2,
+      "wip": 4,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 167.575728,
+      "event": "departure",
+      "queue_len": 2,
+      "wip": 3,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 167.575728,
+      "event": "service_start",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 169.352588,
+      "event": "departure",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 169.352588,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 170.486764,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 170.556222,
+      "event": "arrival",
+      "queue_len": 2,
+      "wip": 4,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 171.429192,
+      "event": "departure",
+      "queue_len": 2,
+      "wip": 3,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 171.429192,
+      "event": "service_start",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 171.492943,
+      "event": "departure",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 171.492943,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 171.895296,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 173.391433,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 173.391433,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 174.827809,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 179.292369,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 179.292369,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 181.073965,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 181.4639,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 181.4639,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 181.764246,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 182.247879,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 182.247879,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 183.880417,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 183.990085,
+      "event": "arrival",
+      "queue_len": 2,
+      "wip": 4,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 184.118458,
+      "event": "arrival",
+      "queue_len": 3,
+      "wip": 5,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 184.642434,
+      "event": "arrival",
+      "queue_len": 4,
+      "wip": 6,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 184.78267,
+      "event": "departure",
+      "queue_len": 4,
+      "wip": 5,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 184.78267,
+      "event": "service_start",
+      "queue_len": 3,
+      "wip": 5,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 185.989056,
+      "event": "departure",
+      "queue_len": 3,
+      "wip": 4,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 185.989056,
+      "event": "service_start",
+      "queue_len": 2,
+      "wip": 4,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 186.004447,
+      "event": "departure",
+      "queue_len": 2,
+      "wip": 3,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 186.004447,
+      "event": "service_start",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 187.851572,
+      "event": "arrival",
+      "queue_len": 2,
+      "wip": 4,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 189.412328,
+      "event": "departure",
+      "queue_len": 2,
+      "wip": 3,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 189.412328,
+      "event": "service_start",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 190.910647,
+      "event": "departure",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 190.910647,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 192.602047,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 192.997988,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 192.997988,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 193.51882,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 194.181441,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 0,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 197.131689,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 1,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 197.131689,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 197.878296,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 0,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 206.059068,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 1,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 206.059068,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 207.499762,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 207.499762,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 207.526209,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 209.569978,
+      "event": "departure",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 209.569978,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 209.991157,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 210.741678,
+      "event": "arrival",
+      "queue_len": 2,
+      "wip": 4,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 212.277775,
+      "event": "arrival",
+      "queue_len": 3,
+      "wip": 5,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 212.597932,
+      "event": "departure",
+      "queue_len": 3,
+      "wip": 4,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 212.597932,
+      "event": "service_start",
+      "queue_len": 2,
+      "wip": 4,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 213.170928,
+      "event": "departure",
+      "queue_len": 2,
+      "wip": 3,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 213.170928,
+      "event": "service_start",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 214.687998,
+      "event": "departure",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 214.687998,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 215.189405,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 215.699809,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 215.699809,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 216.608418,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 216.848752,
+      "event": "departure",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 216.848752,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 218.503652,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 220.796471,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 220.796471,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 220.981824,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 222.36928,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 0,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 222.890116,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 1,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 222.890116,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 223.623335,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 0,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 224.774675,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 1,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 224.774675,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 225.808054,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 225.808054,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 226.444201,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 227.23886,
+      "event": "departure",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 227.23886,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 228.78476,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 230.256732,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 0,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 231.426213,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 1,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 231.426213,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 233.300125,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 233.300125,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 234.357123,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 235.155189,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 235.155189,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 235.419776,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 235.6735,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 0,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 236.303347,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 1,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 236.303347,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 237.062767,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 237.062767,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 237.188787,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 237.888614,
+      "event": "arrival",
+      "queue_len": 2,
+      "wip": 4,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 238.43388,
+      "event": "arrival",
+      "queue_len": 3,
+      "wip": 5,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 238.694183,
+      "event": "departure",
+      "queue_len": 3,
+      "wip": 4,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 238.694183,
+      "event": "service_start",
+      "queue_len": 2,
+      "wip": 4,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 238.729236,
+      "event": "departure",
+      "queue_len": 2,
+      "wip": 3,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 238.729236,
+      "event": "service_start",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 239.030607,
+      "event": "arrival",
+      "queue_len": 2,
+      "wip": 4,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 239.935432,
+      "event": "departure",
+      "queue_len": 2,
+      "wip": 3,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 239.935432,
+      "event": "service_start",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 240.530654,
+      "event": "arrival",
+      "queue_len": 2,
+      "wip": 4,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 241.81196,
+      "event": "arrival",
+      "queue_len": 3,
+      "wip": 5,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 241.948347,
+      "event": "departure",
+      "queue_len": 3,
+      "wip": 4,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 241.948347,
+      "event": "service_start",
+      "queue_len": 2,
+      "wip": 4,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 243.334309,
+      "event": "arrival",
+      "queue_len": 3,
+      "wip": 5,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 245.437145,
+      "event": "arrival",
+      "queue_len": 4,
+      "wip": 6,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 245.589021,
+      "event": "departure",
+      "queue_len": 4,
+      "wip": 5,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 245.589021,
+      "event": "service_start",
+      "queue_len": 3,
+      "wip": 5,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 246.896426,
+      "event": "arrival",
+      "queue_len": 4,
+      "wip": 6,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 246.968691,
+      "event": "departure",
+      "queue_len": 4,
+      "wip": 5,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 246.968691,
+      "event": "service_start",
+      "queue_len": 3,
+      "wip": 5,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 247.014277,
+      "event": "arrival",
+      "queue_len": 4,
+      "wip": 6,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 249.047331,
+      "event": "departure",
+      "queue_len": 4,
+      "wip": 5,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 249.047331,
+      "event": "service_start",
+      "queue_len": 3,
+      "wip": 5,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 249.600109,
+      "event": "arrival",
+      "queue_len": 4,
+      "wip": 6,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 254.506459,
+      "event": "departure",
+      "queue_len": 4,
+      "wip": 5,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 254.506459,
+      "event": "service_start",
+      "queue_len": 3,
+      "wip": 5,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 255.043313,
+      "event": "departure",
+      "queue_len": 3,
+      "wip": 4,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 255.043313,
+      "event": "service_start",
+      "queue_len": 2,
+      "wip": 4,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 255.499622,
+      "event": "arrival",
+      "queue_len": 3,
+      "wip": 5,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 257.566625,
+      "event": "departure",
+      "queue_len": 3,
+      "wip": 4,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 257.566625,
+      "event": "service_start",
+      "queue_len": 2,
+      "wip": 4,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 258.42028,
+      "event": "departure",
+      "queue_len": 2,
+      "wip": 3,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 258.42028,
+      "event": "service_start",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 260.666498,
+      "event": "arrival",
+      "queue_len": 2,
+      "wip": 4,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 262.035349,
+      "event": "arrival",
+      "queue_len": 3,
+      "wip": 5,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 263.771609,
+      "event": "departure",
+      "queue_len": 3,
+      "wip": 4,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 263.771609,
+      "event": "service_start",
+      "queue_len": 2,
+      "wip": 4,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 265.338573,
+      "event": "arrival",
+      "queue_len": 3,
+      "wip": 5,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 266.241748,
+      "event": "departure",
+      "queue_len": 3,
+      "wip": 4,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 266.241748,
+      "event": "service_start",
+      "queue_len": 2,
+      "wip": 4,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 268.361227,
+      "event": "arrival",
+      "queue_len": 3,
+      "wip": 5,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 268.63672,
+      "event": "departure",
+      "queue_len": 3,
+      "wip": 4,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 268.63672,
+      "event": "service_start",
+      "queue_len": 2,
+      "wip": 4,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 268.679361,
+      "event": "departure",
+      "queue_len": 2,
+      "wip": 3,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 268.679361,
+      "event": "service_start",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 269.853216,
+      "event": "arrival",
+      "queue_len": 2,
+      "wip": 4,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 271.050522,
+      "event": "departure",
+      "queue_len": 2,
+      "wip": 3,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 271.050522,
+      "event": "service_start",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 271.282018,
+      "event": "departure",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 271.282018,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 272.574624,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 272.722396,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 0,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 272.758634,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 1,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 272.758634,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 273.074683,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 0,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 273.961704,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 1,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 273.961704,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 274.821308,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 0,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 275.089777,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 1,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 275.089777,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 275.95901,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 275.95901,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 278.355443,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 278.39091,
+      "event": "departure",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 278.39091,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 278.753076,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 279.182181,
+      "event": "departure",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 279.182181,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 279.260038,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 283.108782,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 283.108782,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 283.720848,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 285.707453,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 0,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 286.547709,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 1,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 286.547709,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 287.315714,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 0,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 287.599229,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 1,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 287.599229,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 288.344478,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 0,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 290.077999,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 1,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 290.077999,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 293.83385,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 0,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 294.24521,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 1,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 294.24521,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 296.127801,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 296.127801,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 296.994652,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 297.376961,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 297.376961,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 297.42089,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 297.430371,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 0,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 299.941256,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 1,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 299.941256,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 300.79798,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 0,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 302.406586,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 1,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 302.406586,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 302.611804,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 302.611804,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 303.619945,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 310.949375,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 310.949375,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 313.898202,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 314.67697,
+      "event": "departure",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 314.67697,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 314.976991,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 314.985696,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 0,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 315.334365,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 1,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 315.334365,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 317.973326,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 0,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 330.640434,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 1,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 330.640434,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 330.96993,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 330.96993,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 331.001246,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 334.781451,
+      "event": "arrival",
+      "queue_len": 2,
+      "wip": 4,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 335.530681,
+      "event": "arrival",
+      "queue_len": 3,
+      "wip": 5,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 335.6657,
+      "event": "departure",
+      "queue_len": 3,
+      "wip": 4,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 335.6657,
+      "event": "service_start",
+      "queue_len": 2,
+      "wip": 4,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 336.821064,
+      "event": "arrival",
+      "queue_len": 3,
+      "wip": 5,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 338.380901,
+      "event": "departure",
+      "queue_len": 3,
+      "wip": 4,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 338.380901,
+      "event": "service_start",
+      "queue_len": 2,
+      "wip": 4,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 339.017593,
+      "event": "departure",
+      "queue_len": 2,
+      "wip": 3,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 339.017593,
+      "event": "service_start",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 340.317825,
+      "event": "departure",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 340.317825,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 340.753768,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 342.550983,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 342.550983,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 344.078073,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 345.18161,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 0,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 346.212841,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 1,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 346.212841,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 347.137111,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 347.137111,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 347.314181,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 347.71736,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 347.71736,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 348.397091,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 348.921949,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 0,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 357.139995,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 1,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 357.139995,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 361.393555,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 361.393555,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 361.825447,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 364.237669,
+      "event": "arrival",
+      "queue_len": 2,
+      "wip": 4,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 365.81736,
+      "event": "arrival",
+      "queue_len": 3,
+      "wip": 5,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 366.738424,
+      "event": "arrival",
+      "queue_len": 4,
+      "wip": 6,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 366.899792,
+      "event": "arrival",
+      "queue_len": 5,
+      "wip": 7,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 367.229718,
+      "event": "departure",
+      "queue_len": 5,
+      "wip": 6,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 367.229718,
+      "event": "service_start",
+      "queue_len": 4,
+      "wip": 6,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 367.753262,
+      "event": "arrival",
+      "queue_len": 5,
+      "wip": 7,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 368.068374,
+      "event": "arrival",
+      "queue_len": 6,
+      "wip": 8,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 369.089658,
+      "event": "arrival",
+      "queue_len": 7,
+      "wip": 9,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 371.182706,
+      "event": "departure",
+      "queue_len": 7,
+      "wip": 8,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 371.182706,
+      "event": "service_start",
+      "queue_len": 6,
+      "wip": 8,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 373.209861,
+      "event": "departure",
+      "queue_len": 6,
+      "wip": 7,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 373.209861,
+      "event": "service_start",
+      "queue_len": 5,
+      "wip": 7,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 375.139243,
+      "event": "arrival",
+      "queue_len": 6,
+      "wip": 8,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 376.15949,
+      "event": "departure",
+      "queue_len": 6,
+      "wip": 7,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 376.15949,
+      "event": "service_start",
+      "queue_len": 5,
+      "wip": 7,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 377.517266,
+      "event": "departure",
+      "queue_len": 5,
+      "wip": 6,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 377.517266,
+      "event": "service_start",
+      "queue_len": 4,
+      "wip": 6,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 378.614923,
+      "event": "departure",
+      "queue_len": 4,
+      "wip": 5,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 378.614923,
+      "event": "service_start",
+      "queue_len": 3,
+      "wip": 5,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 378.807936,
+      "event": "departure",
+      "queue_len": 3,
+      "wip": 4,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 378.807936,
+      "event": "service_start",
+      "queue_len": 2,
+      "wip": 4,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 379.740064,
+      "event": "departure",
+      "queue_len": 2,
+      "wip": 3,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 379.740064,
+      "event": "service_start",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 380.461965,
+      "event": "departure",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 380.461965,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 381.190228,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 381.262778,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 0,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 381.733027,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 1,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 381.733027,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 382.126146,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 382.126146,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 383.079619,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 385.090309,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 385.090309,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 385.51882,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 386.273807,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 386.273807,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 387.632813,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 388.196502,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 0,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 388.492712,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 1,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 388.492712,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 392.883441,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 392.883441,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 393.450811,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 398.11002,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 398.11002,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 400.647,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 401.096479,
+      "event": "departure",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 401.096479,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 401.102864,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 401.309003,
+      "event": "departure",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 401.309003,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 402.112019,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 402.78155,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 402.78155,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 404.192264,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 404.409979,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 404.409979,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 405.275781,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 407.230823,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 0,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 411.489236,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 1,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 411.489236,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 418.011557,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 0,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 418.227001,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 1,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 418.227001,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 418.539918,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 418.539918,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 420.312199,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 422.538803,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 0,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 423.624179,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 1,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 423.624179,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 423.886948,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 423.886948,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 424.307459,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 424.444758,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 424.444758,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 424.996337,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 427.269731,
+      "event": "arrival",
+      "queue_len": 2,
+      "wip": 4,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 428.628553,
+      "event": "departure",
+      "queue_len": 2,
+      "wip": 3,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 428.628553,
+      "event": "service_start",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 428.69022,
+      "event": "arrival",
+      "queue_len": 2,
+      "wip": 4,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 431.852429,
+      "event": "departure",
+      "queue_len": 2,
+      "wip": 3,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 431.852429,
+      "event": "service_start",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 432.440005,
+      "event": "arrival",
+      "queue_len": 2,
+      "wip": 4,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 434.241272,
+      "event": "departure",
+      "queue_len": 2,
+      "wip": 3,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 434.241272,
+      "event": "service_start",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 434.40038,
+      "event": "departure",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 434.40038,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 434.973082,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 437.847364,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 437.847364,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 438.461027,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 438.538329,
+      "event": "departure",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 438.538329,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 439.100027,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 440.282253,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 0,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 441.713321,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 1,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 441.713321,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 445.561273,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 0,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 446.162436,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 1,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 446.162436,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 446.757963,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 446.757963,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 447.826013,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 448.56351,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 448.56351,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 448.942398,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 449.846541,
+      "event": "arrival",
+      "queue_len": 2,
+      "wip": 4,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 451.270504,
+      "event": "arrival",
+      "queue_len": 3,
+      "wip": 5,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 451.472673,
+      "event": "arrival",
+      "queue_len": 4,
+      "wip": 6,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 451.755194,
+      "event": "departure",
+      "queue_len": 4,
+      "wip": 5,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 451.755194,
+      "event": "service_start",
+      "queue_len": 3,
+      "wip": 5,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 452.464668,
+      "event": "departure",
+      "queue_len": 3,
+      "wip": 4,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 452.464668,
+      "event": "service_start",
+      "queue_len": 2,
+      "wip": 4,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 452.469483,
+      "event": "departure",
+      "queue_len": 2,
+      "wip": 3,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 452.469483,
+      "event": "service_start",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 452.782315,
+      "event": "departure",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 452.782315,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 453.528901,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 453.57956,
+      "event": "arrival",
+      "queue_len": 2,
+      "wip": 4,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 455.373277,
+      "event": "departure",
+      "queue_len": 2,
+      "wip": 3,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 455.373277,
+      "event": "service_start",
+      "queue_len": 1,
+      "wip": 3,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 456.295119,
+      "event": "departure",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 456.295119,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 456.799236,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 457.160421,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 0,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 458.598429,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 1,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 458.598429,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 458.626394,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 458.626394,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 458.915685,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 459.568478,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 0,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 460.967236,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 1,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 460.967236,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 461.125125,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 0,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 461.695953,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 1,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 461.695953,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 466.389817,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 0,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 467.110731,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 1,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 467.110731,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 469.537081,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 0,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 470.909529,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 1,
+      "busy": [
+        false,
+        false
+      ]
+    },
+    {
+      "t": 470.909529,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 474.179084,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 474.179084,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 474.185507,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 475.327005,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        true,
+        false
+      ]
+    },
+    {
+      "t": 475.327005,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 475.685595,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 475.768541,
+      "event": "arrival",
+      "queue_len": 1,
+      "wip": 2,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 475.768541,
+      "event": "service_start",
+      "queue_len": 0,
+      "wip": 2,
+      "busy": [
+        true,
+        true
+      ]
+    },
+    {
+      "t": 476.804846,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 1,
+      "busy": [
+        false,
+        true
+      ]
+    },
+    {
+      "t": 479.1823,
+      "event": "departure",
+      "queue_len": 0,
+      "wip": 0,
+      "busy": [
+        false,
+        false
+      ]
+    }
+  ],
   "replications": [
     {
       "replication": 0,
@@ -137,7 +6322,11 @@
       "max_queue_length": 7,
       "avg_wip": 1.833144,
       "max_wip": 9,
-      "avg_sojourn": 4.284927
+      "avg_sojourn": 4.284927,
+      "barista_utilization": [
+        0.673304,
+        0.580106
+      ]
     },
     {
       "replication": 1,
@@ -153,7 +6342,11 @@
       "max_queue_length": 15,
       "avg_wip": 3.756273,
       "max_wip": 17,
-      "avg_sojourn": 7.280095
+      "avg_sojourn": 7.280095,
+      "barista_utilization": [
+        0.73316,
+        0.735892
+      ]
     },
     {
       "replication": 2,
@@ -169,7 +6362,11 @@
       "max_queue_length": 14,
       "avg_wip": 4.269425,
       "max_wip": 16,
-      "avg_sojourn": 8.598346
+      "avg_sojourn": 8.598346,
+      "barista_utilization": [
+        0.828325,
+        0.830885
+      ]
     },
     {
       "replication": 3,
@@ -185,7 +6382,11 @@
       "max_queue_length": 18,
       "avg_wip": 5.263436,
       "max_wip": 20,
-      "avg_sojourn": 9.752145
+      "avg_sojourn": 9.752145,
+      "barista_utilization": [
+        0.818036,
+        0.835463
+      ]
     },
     {
       "replication": 4,
@@ -201,7 +6402,11 @@
       "max_queue_length": 9,
       "avg_wip": 2.916878,
       "max_wip": 11,
-      "avg_sojourn": 5.665606
+      "avg_sojourn": 5.665606,
+      "barista_utilization": [
+        0.724848,
+        0.744752
+      ]
     },
     {
       "replication": 5,
@@ -217,7 +6422,11 @@
       "max_queue_length": 11,
       "avg_wip": 4.00559,
       "max_wip": 13,
-      "avg_sojourn": 7.162029
+      "avg_sojourn": 7.162029,
+      "barista_utilization": [
+        0.780344,
+        0.815259
+      ]
     },
     {
       "replication": 6,
@@ -233,7 +6442,11 @@
       "max_queue_length": 10,
       "avg_wip": 3.883637,
       "max_wip": 12,
-      "avg_sojourn": 7.401901
+      "avg_sojourn": 7.401901,
+      "barista_utilization": [
+        0.751338,
+        0.805264
+      ]
     },
     {
       "replication": 7,
@@ -249,7 +6462,11 @@
       "max_queue_length": 8,
       "avg_wip": 2.95749,
       "max_wip": 10,
-      "avg_sojourn": 5.646738
+      "avg_sojourn": 5.646738,
+      "barista_utilization": [
+        0.76761,
+        0.746405
+      ]
     },
     {
       "replication": 8,
@@ -265,7 +6482,11 @@
       "max_queue_length": 14,
       "avg_wip": 2.974712,
       "max_wip": 16,
-      "avg_sojourn": 5.846368
+      "avg_sojourn": 5.846368,
+      "barista_utilization": [
+        0.655728,
+        0.661311
+      ]
     },
     {
       "replication": 9,
@@ -281,7 +6502,11 @@
       "max_queue_length": 11,
       "avg_wip": 2.716287,
       "max_wip": 13,
-      "avg_sojourn": 5.237144
+      "avg_sojourn": 5.237144,
+      "barista_utilization": [
+        0.68475,
+        0.737954
+      ]
     },
     {
       "replication": 10,
@@ -297,7 +6522,11 @@
       "max_queue_length": 7,
       "avg_wip": 2.817614,
       "max_wip": 9,
-      "avg_sojourn": 5.622432
+      "avg_sojourn": 5.622432,
+      "barista_utilization": [
+        0.727536,
+        0.78245
+      ]
     },
     {
       "replication": 11,
@@ -313,7 +6542,11 @@
       "max_queue_length": 9,
       "avg_wip": 2.939164,
       "max_wip": 11,
-      "avg_sojourn": 5.865855
+      "avg_sojourn": 5.865855,
+      "barista_utilization": [
+        0.7449,
+        0.773924
+      ]
     },
     {
       "replication": 12,
@@ -329,7 +6562,11 @@
       "max_queue_length": 9,
       "avg_wip": 3.068041,
       "max_wip": 11,
-      "avg_sojourn": 6.026286
+      "avg_sojourn": 6.026286,
+      "barista_utilization": [
+        0.720574,
+        0.775642
+      ]
     },
     {
       "replication": 13,
@@ -345,7 +6582,11 @@
       "max_queue_length": 12,
       "avg_wip": 2.916817,
       "max_wip": 14,
-      "avg_sojourn": 5.375498
+      "avg_sojourn": 5.375498,
+      "barista_utilization": [
+        0.770752,
+        0.773401
+      ]
     },
     {
       "replication": 14,
@@ -361,7 +6602,11 @@
       "max_queue_length": 8,
       "avg_wip": 2.911213,
       "max_wip": 10,
-      "avg_sojourn": 5.716413
+      "avg_sojourn": 5.716413,
+      "barista_utilization": [
+        0.739269,
+        0.774927
+      ]
     },
     {
       "replication": 15,
@@ -377,7 +6622,11 @@
       "max_queue_length": 7,
       "avg_wip": 2.052192,
       "max_wip": 9,
-      "avg_sojourn": 3.911743
+      "avg_sojourn": 3.911743,
+      "barista_utilization": [
+        0.726388,
+        0.686894
+      ]
     },
     {
       "replication": 16,
@@ -393,7 +6642,11 @@
       "max_queue_length": 14,
       "avg_wip": 3.702562,
       "max_wip": 16,
-      "avg_sojourn": 7.347203
+      "avg_sojourn": 7.347203,
+      "barista_utilization": [
+        0.739014,
+        0.75894
+      ]
     },
     {
       "replication": 17,
@@ -409,7 +6662,11 @@
       "max_queue_length": 12,
       "avg_wip": 2.960862,
       "max_wip": 14,
-      "avg_sojourn": 5.736053
+      "avg_sojourn": 5.736053,
+      "barista_utilization": [
+        0.777952,
+        0.715107
+      ]
     },
     {
       "replication": 18,
@@ -425,7 +6682,11 @@
       "max_queue_length": 8,
       "avg_wip": 3.18184,
       "max_wip": 10,
-      "avg_sojourn": 5.694835
+      "avg_sojourn": 5.694835,
+      "barista_utilization": [
+        0.778646,
+        0.800387
+      ]
     },
     {
       "replication": 19,
@@ -441,7 +6702,11 @@
       "max_queue_length": 13,
       "avg_wip": 4.027168,
       "max_wip": 15,
-      "avg_sojourn": 7.954711
+      "avg_sojourn": 7.954711,
+      "barista_utilization": [
+        0.776709,
+        0.745773
+      ]
     },
     {
       "replication": 20,
@@ -457,7 +6722,11 @@
       "max_queue_length": 8,
       "avg_wip": 2.074648,
       "max_wip": 10,
-      "avg_sojourn": 4.934541
+      "avg_sojourn": 4.934541,
+      "barista_utilization": [
+        0.673644,
+        0.64909
+      ]
     },
     {
       "replication": 21,
@@ -473,7 +6742,11 @@
       "max_queue_length": 9,
       "avg_wip": 2.279703,
       "max_wip": 11,
-      "avg_sojourn": 4.465789
+      "avg_sojourn": 4.465789,
+      "barista_utilization": [
+        0.706925,
+        0.650888
+      ]
     },
     {
       "replication": 22,
@@ -489,7 +6762,11 @@
       "max_queue_length": 10,
       "avg_wip": 2.93369,
       "max_wip": 12,
-      "avg_sojourn": 5.755374
+      "avg_sojourn": 5.755374,
+      "barista_utilization": [
+        0.780998,
+        0.812809
+      ]
     },
     {
       "replication": 23,
@@ -505,7 +6782,11 @@
       "max_queue_length": 14,
       "avg_wip": 2.957646,
       "max_wip": 16,
-      "avg_sojourn": 6.181301
+      "avg_sojourn": 6.181301,
+      "barista_utilization": [
+        0.778935,
+        0.730858
+      ]
     },
     {
       "replication": 24,
@@ -521,7 +6802,11 @@
       "max_queue_length": 8,
       "avg_wip": 3.094947,
       "max_wip": 10,
-      "avg_sojourn": 6.349094
+      "avg_sojourn": 6.349094,
+      "barista_utilization": [
+        0.804117,
+        0.786439
+      ]
     },
     {
       "replication": 25,
@@ -537,7 +6822,11 @@
       "max_queue_length": 16,
       "avg_wip": 3.666191,
       "max_wip": 18,
-      "avg_sojourn": 7.165425
+      "avg_sojourn": 7.165425,
+      "barista_utilization": [
+        0.747173,
+        0.773325
+      ]
     },
     {
       "replication": 26,
@@ -553,7 +6842,11 @@
       "max_queue_length": 10,
       "avg_wip": 2.670211,
       "max_wip": 12,
-      "avg_sojourn": 6.030475
+      "avg_sojourn": 6.030475,
+      "barista_utilization": [
+        0.755861,
+        0.709402
+      ]
     },
     {
       "replication": 27,
@@ -569,7 +6862,11 @@
       "max_queue_length": 12,
       "avg_wip": 2.759192,
       "max_wip": 14,
-      "avg_sojourn": 5.802458
+      "avg_sojourn": 5.802458,
+      "barista_utilization": [
+        0.653504,
+        0.721985
+      ]
     },
     {
       "replication": 28,
@@ -585,7 +6882,11 @@
       "max_queue_length": 12,
       "avg_wip": 4.175401,
       "max_wip": 14,
-      "avg_sojourn": 8.275999
+      "avg_sojourn": 8.275999,
+      "barista_utilization": [
+        0.791528,
+        0.832023
+      ]
     },
     {
       "replication": 29,
@@ -601,7 +6902,11 @@
       "max_queue_length": 9,
       "avg_wip": 2.874847,
       "max_wip": 11,
-      "avg_sojourn": 5.87144
+      "avg_sojourn": 5.87144,
+      "barista_utilization": [
+        0.760224,
+        0.733578
+      ]
     },
     {
       "replication": 30,
@@ -617,7 +6922,11 @@
       "max_queue_length": 11,
       "avg_wip": 3.665062,
       "max_wip": 13,
-      "avg_sojourn": 6.974975
+      "avg_sojourn": 6.974975,
+      "barista_utilization": [
+        0.805762,
+        0.800898
+      ]
     },
     {
       "replication": 31,
@@ -633,7 +6942,11 @@
       "max_queue_length": 12,
       "avg_wip": 3.342147,
       "max_wip": 14,
-      "avg_sojourn": 6.610209
+      "avg_sojourn": 6.610209,
+      "barista_utilization": [
+        0.786179,
+        0.749808
+      ]
     },
     {
       "replication": 32,
@@ -649,7 +6962,11 @@
       "max_queue_length": 12,
       "avg_wip": 3.695008,
       "max_wip": 14,
-      "avg_sojourn": 7.920288
+      "avg_sojourn": 7.920288,
+      "barista_utilization": [
+        0.723701,
+        0.768155
+      ]
     },
     {
       "replication": 33,
@@ -665,7 +6982,11 @@
       "max_queue_length": 8,
       "avg_wip": 1.981489,
       "max_wip": 10,
-      "avg_sojourn": 3.986657
+      "avg_sojourn": 3.986657,
+      "barista_utilization": [
+        0.681684,
+        0.698024
+      ]
     },
     {
       "replication": 34,
@@ -681,7 +7002,11 @@
       "max_queue_length": 21,
       "avg_wip": 4.236528,
       "max_wip": 23,
-      "avg_sojourn": 8.966284
+      "avg_sojourn": 8.966284,
+      "barista_utilization": [
+        0.767726,
+        0.7929
+      ]
     },
     {
       "replication": 35,
@@ -697,7 +7022,11 @@
       "max_queue_length": 11,
       "avg_wip": 3.901803,
       "max_wip": 13,
-      "avg_sojourn": 6.920158
+      "avg_sojourn": 6.920158,
+      "barista_utilization": [
+        0.768572,
+        0.843537
+      ]
     },
     {
       "replication": 36,
@@ -713,7 +7042,11 @@
       "max_queue_length": 7,
       "avg_wip": 2.154167,
       "max_wip": 9,
-      "avg_sojourn": 4.690046
+      "avg_sojourn": 4.690046,
+      "barista_utilization": [
+        0.670771,
+        0.642902
+      ]
     },
     {
       "replication": 37,
@@ -729,7 +7062,11 @@
       "max_queue_length": 23,
       "avg_wip": 6.548176,
       "max_wip": 25,
-      "avg_sojourn": 13.45381
+      "avg_sojourn": 13.45381,
+      "barista_utilization": [
+        0.76361,
+        0.820545
+      ]
     },
     {
       "replication": 38,
@@ -745,7 +7082,11 @@
       "max_queue_length": 12,
       "avg_wip": 3.538272,
       "max_wip": 14,
-      "avg_sojourn": 7.862035
+      "avg_sojourn": 7.862035,
+      "barista_utilization": [
+        0.720994,
+        0.73514
+      ]
     },
     {
       "replication": 39,
@@ -761,7 +7102,11 @@
       "max_queue_length": 15,
       "avg_wip": 3.539948,
       "max_wip": 17,
-      "avg_sojourn": 6.339057
+      "avg_sojourn": 6.339057,
+      "barista_utilization": [
+        0.78841,
+        0.783027
+      ]
     },
     {
       "replication": 40,
@@ -777,7 +7122,11 @@
       "max_queue_length": 12,
       "avg_wip": 2.898326,
       "max_wip": 14,
-      "avg_sojourn": 5.296523
+      "avg_sojourn": 5.296523,
+      "barista_utilization": [
+        0.76853,
+        0.754023
+      ]
     },
     {
       "replication": 41,
@@ -793,7 +7142,11 @@
       "max_queue_length": 8,
       "avg_wip": 1.976949,
       "max_wip": 10,
-      "avg_sojourn": 4.250295
+      "avg_sojourn": 4.250295,
+      "barista_utilization": [
+        0.668519,
+        0.640326
+      ]
     },
     {
       "replication": 42,
@@ -809,7 +7162,11 @@
       "max_queue_length": 10,
       "avg_wip": 3.579339,
       "max_wip": 12,
-      "avg_sojourn": 6.846803
+      "avg_sojourn": 6.846803,
+      "barista_utilization": [
+        0.757288,
+        0.817465
+      ]
     },
     {
       "replication": 43,
@@ -825,7 +7182,11 @@
       "max_queue_length": 18,
       "avg_wip": 6.319441,
       "max_wip": 20,
-      "avg_sojourn": 12.299555
+      "avg_sojourn": 12.299555,
+      "barista_utilization": [
+        0.85464,
+        0.817731
+      ]
     },
     {
       "replication": 44,
@@ -841,7 +7202,11 @@
       "max_queue_length": 9,
       "avg_wip": 2.922366,
       "max_wip": 11,
-      "avg_sojourn": 5.938817
+      "avg_sojourn": 5.938817,
+      "barista_utilization": [
+        0.765225,
+        0.775611
+      ]
     },
     {
       "replication": 45,
@@ -857,7 +7222,11 @@
       "max_queue_length": 10,
       "avg_wip": 2.78221,
       "max_wip": 12,
-      "avg_sojourn": 5.54888
+      "avg_sojourn": 5.54888,
+      "barista_utilization": [
+        0.657643,
+        0.73861
+      ]
     },
     {
       "replication": 46,
@@ -873,7 +7242,11 @@
       "max_queue_length": 11,
       "avg_wip": 3.283156,
       "max_wip": 13,
-      "avg_sojourn": 6.775774
+      "avg_sojourn": 6.775774,
+      "barista_utilization": [
+        0.785436,
+        0.835181
+      ]
     },
     {
       "replication": 47,
@@ -889,7 +7262,11 @@
       "max_queue_length": 14,
       "avg_wip": 4.422957,
       "max_wip": 16,
-      "avg_sojourn": 8.043513
+      "avg_sojourn": 8.043513,
+      "barista_utilization": [
+        0.884267,
+        0.817197
+      ]
     },
     {
       "replication": 48,
@@ -905,7 +7282,11 @@
       "max_queue_length": 13,
       "avg_wip": 3.59969,
       "max_wip": 15,
-      "avg_sojourn": 6.565813
+      "avg_sojourn": 6.565813,
+      "barista_utilization": [
+        0.760772,
+        0.812664
+      ]
     },
     {
       "replication": 49,
@@ -921,7 +7302,11 @@
       "max_queue_length": 7,
       "avg_wip": 2.736626,
       "max_wip": 9,
-      "avg_sojourn": 5.686573
+      "avg_sojourn": 5.686573,
+      "barista_utilization": [
+        0.677365,
+        0.747731
+      ]
     }
   ],
   "validation": {

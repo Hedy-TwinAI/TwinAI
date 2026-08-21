@@ -1,0 +1,13 @@
+[project]
+name = "twinai"
+version = "0.1.0"
+description = "SimPy discrete-event simulation models (BrewLine coffee-bar digital twin)"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.141.1",
+    "simpy>=4.1.2",
+    "uvicorn[standard]>=0.52.4",
+]
+
+[tool.uv]
+package = false

@@ -80,6 +80,7 @@ class BrewLine:
         horizon: float,
         seed: int,
         verbose: bool = False,
+        record_trace: bool = False,
     ):
         if arrival_rate <= 0:
             raise ValueError("arrival_rate must be > 0")
@@ -96,6 +97,7 @@ class BrewLine:
         self.horizon = horizon
         self.seed = seed
         self.verbose = verbose
+        self.record_trace = record_trace
 
         # Each replication owns its RNG stream, so runs are independent of
         # each other and of module-level `random` state -- and reproducible.
@@ -115,6 +117,15 @@ class BrewLine:
         self._max_wip = 0
         self._busy_time = 0.0
 
+        # Per-barista slot tracking, for resource-level utilization and the
+        # event trace. `_free_slots` is a stack of idle slot indices; popping
+        # one on service-start and pushing it back on departure is safe with
+        # no locking because SimPy is cooperatively scheduled -- no other
+        # process can run between the `yield req` grant and the pop.
+        self._free_slots = list(range(num_baristas))
+        self._busy_time_by_slot = [0.0] * num_baristas
+        self.trace: list[dict] = []
+
     # ------------------------------------------------------------------
     # Statistics plumbing
     # ------------------------------------------------------------------
@@ -131,6 +142,18 @@ class BrewLine:
             self._area_wip += self._n_system * dt
         self._last_t = self.env.now
 
+    def _snapshot(self, event: str) -> None:
+        """Record the post-mutation state for the trace, if enabled."""
+        if not self.record_trace:
+            return
+        self.trace.append({
+            "t": self.env.now,
+            "event": event,
+            "queue_len": self._n_queue,
+            "wip": self._n_system,
+            "busy": [i not in self._free_slots for i in range(self.num_baristas)],
+        })
+
     # ------------------------------------------------------------------
     # Processes
     # ------------------------------------------------------------------
@@ -142,25 +165,31 @@ class BrewLine:
         self._n_system += 1
         self._max_queue = max(self._max_queue, self._n_queue)
         self._max_wip = max(self._max_wip, self._n_system)
+        self._snapshot("arrival")
         if self.verbose:
             print(f"Customer {cid} arrives at {arrival_time:.2f}")
 
         with self.baristas.request() as req:
             yield req
+            slot = self._free_slots.pop()
 
             start_time = self.env.now
             self._advance()
             self._n_queue -= 1
+            self._snapshot("service_start")
             if self.verbose:
                 print(f"Customer {cid} starts service at {start_time:.2f}")
 
             service_time = self.rng.expovariate(1.0 / self.mean_service_time)
             self._busy_time += service_time
+            self._busy_time_by_slot[slot] += service_time
             yield self.env.timeout(service_time)
 
             end_time = self.env.now
             self._advance()
             self._n_system -= 1
+            self._free_slots.append(slot)
+            self._snapshot("departure")
             if self.verbose:
                 print(f"Customer {cid} leaves at {end_time:.2f}")
 
@@ -183,6 +212,7 @@ class BrewLine:
     # ------------------------------------------------------------------
 
     def run(self) -> dict:
+        self._snapshot("start")
         self.env.process(self.arrivals())
         self.env.run()  # no `until` -> let every admitted customer finish
         self._advance()  # flush the final interval
@@ -204,6 +234,7 @@ class BrewLine:
                 "avg_wip": 0.0,
                 "max_wip": 0,
                 "avg_sojourn": 0.0,
+                "barista_utilization": [0.0] * self.num_baristas,
             }
 
         cmax = max(r.end_time for r in self.records)
@@ -225,6 +256,7 @@ class BrewLine:
             "avg_wip": self._area_wip / cmax,
             "max_wip": self._max_wip,
             "avg_sojourn": statistics.fmean(sojourns),
+            "barista_utilization": [bt / cmax for bt in self._busy_time_by_slot],
         }
 
     def validate(self) -> dict:
@@ -302,6 +334,7 @@ def run_experiment(
 
     per_rep = []
     validations = []
+    trace = []
     for i, rep_seed in enumerate(seeds):
         sim = BrewLine(
             arrival_rate=arrival_rate,
@@ -310,13 +343,28 @@ def run_experiment(
             horizon=horizon,
             seed=rep_seed,
             verbose=verbose and i == 0,  # only trace the first replication
+            record_trace=(i == 0),  # event trace is only kept for replication 0
         )
         result = sim.run()
         per_rep.append({"replication": i, "seed": rep_seed, **result})
         validations.append(sim.validate()["abs_error"])
+        if i == 0:
+            trace = sim.trace
 
-    kpi_names = [k for k in per_rep[0] if k not in ("replication", "seed")]
+    # barista_utilization is a per-slot list, not a scalar -- summarized
+    # separately below (column-wise) into resource_kpis.
+    kpi_names = [
+        k for k in per_rep[0] if k not in ("replication", "seed", "barista_utilization")
+    ]
     summary = {name: summarize([r[name] for r in per_rep]) for name in kpi_names}
+
+    resource_kpis = {
+        "num_baristas": num_baristas,
+        "utilization_by_barista": [
+            summarize([r["barista_utilization"][i] for r in per_rep])
+            for i in range(num_baristas)
+        ],
+    }
 
     offered_load = arrival_rate * mean_service_time / num_baristas
 
@@ -335,6 +383,8 @@ def run_experiment(
             "stable": offered_load < 1.0,
         },
         "summary": summary,
+        "resource_kpis": resource_kpis,
+        "trace": trace,
         "replications": per_rep,
         "validation": {
             "littles_law_max_abs_error": max(validations),
