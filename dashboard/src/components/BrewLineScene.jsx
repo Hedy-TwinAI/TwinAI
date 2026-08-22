@@ -50,8 +50,11 @@ export default function BrewLineScene({ trace, currentTime, numBaristas, resetKe
     let disposed = false;
     const timer = new THREE.Timer();
 
+    // Bright studio backdrop for the 3D canvas itself -- deliberately
+    // lighter than the dark dashboard chrome around it, so the animation
+    // reads as a lit product shot rather than blending into the dark UI.
     const scene = new THREE.Scene();
-    scene.background = cssColor("--surface-raised", "#202020");
+    scene.background = new THREE.Color(0xf5f5f4);
 
     const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
     camera.position.set(8, 7, 10);
@@ -61,9 +64,9 @@ export default function BrewLineScene({ trace, currentTime, numBaristas, resetKe
     renderer.shadowMap.enabled = true;
     container.appendChild(renderer.domElement);
 
-    const hemi = new THREE.HemisphereLight(0xffffff, 0x222222, 1.1);
+    const hemi = new THREE.HemisphereLight(0xffffff, 0xcccccc, 1.3);
     scene.add(hemi);
-    const dir = new THREE.DirectionalLight(0xffffff, 1.4);
+    const dir = new THREE.DirectionalLight(0xffffff, 1.6);
     dir.position.set(5, 8, 4);
     dir.castShadow = true;
     scene.add(dir);
@@ -73,7 +76,7 @@ export default function BrewLineScene({ trace, currentTime, numBaristas, resetKe
 
     const ground = new THREE.Mesh(
       new THREE.PlaneGeometry(16, 18),
-      new THREE.MeshStandardMaterial({ color: 0x2c2c2a }),
+      new THREE.MeshStandardMaterial({ color: 0xe4e4e1 }),
     );
     ground.rotation.x = -Math.PI / 2;
     ground.position.set(0, 0, 4); // covers the counter (z~0) and the queue line receding to z~13
