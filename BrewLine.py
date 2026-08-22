@@ -142,7 +142,7 @@ class BrewLine:
             self._area_wip += self._n_system * dt
         self._last_t = self.env.now
 
-    def _snapshot(self, event: str) -> None:
+    def _snapshot(self, event: str, cid: int | None = None, slot: int | None = None) -> None:
         """Record the post-mutation state for the trace, if enabled."""
         if not self.record_trace:
             return
@@ -152,6 +152,8 @@ class BrewLine:
             "queue_len": self._n_queue,
             "wip": self._n_system,
             "busy": [i not in self._free_slots for i in range(self.num_baristas)],
+            "cid": cid,
+            "slot": slot,
         })
 
     # ------------------------------------------------------------------
@@ -165,7 +167,7 @@ class BrewLine:
         self._n_system += 1
         self._max_queue = max(self._max_queue, self._n_queue)
         self._max_wip = max(self._max_wip, self._n_system)
-        self._snapshot("arrival")
+        self._snapshot("arrival", cid=cid)
         if self.verbose:
             print(f"Customer {cid} arrives at {arrival_time:.2f}")
 
@@ -176,7 +178,7 @@ class BrewLine:
             start_time = self.env.now
             self._advance()
             self._n_queue -= 1
-            self._snapshot("service_start")
+            self._snapshot("service_start", cid=cid, slot=slot)
             if self.verbose:
                 print(f"Customer {cid} starts service at {start_time:.2f}")
 
@@ -189,7 +191,7 @@ class BrewLine:
             self._advance()
             self._n_system -= 1
             self._free_slots.append(slot)
-            self._snapshot("departure")
+            self._snapshot("departure", cid=cid, slot=slot)
             if self.verbose:
                 print(f"Customer {cid} leaves at {end_time:.2f}")
 

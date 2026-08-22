@@ -2,6 +2,7 @@ const FIELDS = [
   { key: "arrival_rate", label: "Arrival rate", unit: "customers/min", min: 0.05, max: 5, step: 0.05 },
   { key: "num_baristas", label: "Baristas", unit: "servers", min: 1, max: 10, step: 1 },
   { key: "mean_service_time", label: "Mean service time", unit: "min", min: 0.5, max: 20, step: 0.5 },
+  { key: "horizon", label: "Horizon", unit: "min", min: 60, max: 1440, step: 30 },
 ];
 
 export default function ControlPanel({ knobs, onChange, isLoading, error }) {
@@ -11,7 +12,7 @@ export default function ControlPanel({ knobs, onChange, isLoading, error }) {
         <h3 className="text-sm font-medium text-[var(--text-primary)]">Simulation inputs</h3>
         {isLoading && <span className="text-xs text-[var(--text-muted)]">recomputing…</span>}
       </div>
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {FIELDS.map(({ key, label, unit, min, max, step }) => (
           <label key={key} className="text-xs text-[var(--text-secondary)]">
             <div className="mb-1 flex items-baseline justify-between">

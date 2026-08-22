@@ -7,10 +7,15 @@ import ControlPanel from "./components/ControlPanel";
 import QueueOverTimeChart from "./components/QueueOverTimeChart";
 import UtilizationByResourceChart from "./components/UtilizationByResourceChart";
 import PlaybackControls from "./components/PlaybackControls";
+import BrewLineScene from "./components/BrewLineScene";
 
-// horizon/reps/seed are fixed -- only the three checklist knobs are exposed.
-const FIXED = { horizon: 480, reps: 50, seed: 42 };
-const DEFAULT_KNOBS = { arrival_rate: 0.5, num_baristas: 2, mean_service_time: 3.0 };
+// reps/seed are fixed -- horizon and the other checklist knobs are exposed.
+const FIXED = { reps: 50, seed: 42 };
+const DEFAULT_KNOBS = { arrival_rate: 0.5, num_baristas: 2, mean_service_time: 3.0, horizon: 480 };
+// Stable reference so `results?.trace ?? EMPTY_TRACE` doesn't create a new
+// array identity on every render while `results` is still null -- a fresh
+// `[]` literal here would spuriously retrigger effects keyed on `trace`.
+const EMPTY_TRACE = [];
 
 export default function App() {
   const [knobs, setKnobs] = useState(DEFAULT_KNOBS);
@@ -40,9 +45,14 @@ export default function App() {
     return () => clearTimeout(debounceRef.current);
   }, [knobs]);
 
-  const resampled = useMemo(() => resampleTrace(results?.trace ?? [], 300), [results]);
+  const resampled = useMemo(() => resampleTrace(results?.trace ?? EMPTY_TRACE, 300), [results]);
   const playback = useTracePlayback(resampled.length, 20, results);
   const currentPoint = resampled[playback.currentIndex];
+  const dt = resampled.length > 1 ? resampled[1].t - resampled[0].t : 0;
+  const continuousSimTime = playback.rawIndex * dt;
+  const maxConcurrency = Math.ceil(
+    Math.max(results?.summary?.max_wip?.max ?? 0, results?.summary?.max_queue_length?.max ?? 0),
+  );
 
   return (
     <div className="mx-auto max-w-5xl px-6 py-8">
@@ -59,6 +69,16 @@ export default function App() {
 
       <div className="mb-6">
         <KpiGrid summary={results?.summary} />
+      </div>
+
+      <div className="mb-6">
+        <BrewLineScene
+          trace={results?.trace ?? EMPTY_TRACE}
+          currentTime={continuousSimTime}
+          numBaristas={knobs.num_baristas}
+          resetKey={results}
+          maxConcurrency={maxConcurrency}
+        />
       </div>
 
       <div className="mb-6 grid grid-cols-1 gap-4 lg:grid-cols-2">

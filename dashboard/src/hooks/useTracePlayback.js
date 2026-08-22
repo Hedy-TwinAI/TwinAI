@@ -60,6 +60,7 @@ export function useTracePlayback(length, pointsPerSecond = 20, resetKey) {
 
   return {
     currentIndex: Math.round(currentIndex),
+    rawIndex: currentIndex,
     isPlaying,
     play,
     pause,
