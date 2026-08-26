@@ -1,0 +1,19 @@
+server {
+    listen 80;
+    server_name _;
+    root /usr/share/nginx/html;
+    index index.html;
+
+    location /api/ {
+        proxy_pass ${BACKEND_SCHEME}://${BACKEND_HOST}:${BACKEND_PORT}/api/;
+        proxy_http_version 1.1;
+        proxy_ssl_server_name on;
+        proxy_ssl_name ${BACKEND_HOST};
+        proxy_set_header Host ${BACKEND_HOST};
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+
+    location / {
+        try_files $uri /index.html;
+    }
+}

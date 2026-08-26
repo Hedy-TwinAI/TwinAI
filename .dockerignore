@@ -1,0 +1,9 @@
+.venv
+__pycache__
+*.pyc
+.git
+.github
+dashboard/node_modules
+dashboard/dist
+*.mov
+brewline_results.json

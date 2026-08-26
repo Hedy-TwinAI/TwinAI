@@ -1,7 +1,7 @@
 # BrewLine
 
 A digital twin of a coffee bar: a statistically-sound [SimPy](https://simpy.readthedocs.io/)
-discrete-event simulation, served by a FastAPI backend and visualized in a live
+discrete-event simulation, served by a Flask backend and visualized in a live
 React dashboard — including an animated 3D scene of customers arriving,
 queueing, and being served.
 
@@ -29,7 +29,7 @@ docstring for the exact scenario, KPI definitions, and conventions.
 
 ```
 BrewLine.py             SimPy model, KPI computation, CLI entry point
-server/main.py          FastAPI wrapper exposing BrewLine as a JSON API
+server/main.py          Flask wrapper exposing BrewLine as a JSON API
 dashboard/               React + Vite frontend (charts + 3D scene)
   src/App.jsx              top-level layout and simulation-run orchestration
   src/components/          KPI cards, charts, playback controls, 3D scene
@@ -46,12 +46,19 @@ brewline_results.json    example output of a standalone `BrewLine.py` run
 Requires [uv](https://docs.astral.sh/uv/) (Python) and Node.js 20+ (frontend).
 
 ```bash
-# Python deps (SimPy + FastAPI backend), pinned via uv.lock
+# Python deps (SimPy + Flask backend), pinned via uv.lock
 uv sync
 
 # Frontend deps
 cd dashboard && npm install
 ```
+
+Copy `.env.example` to `.env` to configure the backend's default scenario
+(arrival rate, baristas, service time, horizon, replications, seed) without
+touching code — see [server/main.py](server/main.py) for how each
+`BREWLINE_*` variable is used. Values can still be overridden per-request via
+the dashboard's sliders or the `/api/simulate` request body; `.env` only sets
+the defaults. `docker compose` picks up the same file automatically.
 
 ## Running the dashboard
 
@@ -59,7 +66,7 @@ Two processes, run from the repo root and from `dashboard/` respectively:
 
 ```bash
 # Terminal 1 — backend API (http://127.0.0.1:8000)
-uv run uvicorn server.main:app --reload
+uv run python server/main.py
 
 # Terminal 2 — frontend dev server (http://localhost:5173, proxies /api to the backend)
 cd dashboard && npm run dev
@@ -73,6 +80,16 @@ cards, charts, and 3D scene all stay in sync.
 Other frontend commands (run from `dashboard/`): `npm run build` (production
 bundle), `npm run lint` (oxlint), `npm run preview` (serve the production
 build).
+
+### Running with Docker
+
+```bash
+docker compose up --build
+```
+
+This builds and starts both services: the Flask backend
+(`http://localhost:8000`) and the dashboard, served by nginx and proxying
+`/api` to the backend (`http://localhost:8080`). Open `http://localhost:8080`.
 
 ## Running the simulation standalone
 

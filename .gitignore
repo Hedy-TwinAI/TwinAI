@@ -221,3 +221,4 @@ __marimo__/
 .DS_Store
 simulation.py
 node_modules/
+*.mov
