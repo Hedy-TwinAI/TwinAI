@@ -4,11 +4,17 @@ version = "0.1.0"
 description = "SimPy discrete-event simulation models (BrewLine coffee-bar digital twin)"
 requires-python = ">=3.11"
 dependencies = [
+    "azure-search-documents>=11.4.0",
     "flask>=3.1.2",
     "gunicorn>=23.0.0",
+    "mcp>=1.6.0,<2",
+    "openai>=1.50.0",
     "python-dotenv>=1.0.1",
     "pydantic>=2.9",
     "simpy>=4.1.2",
+    "voyageai>=0.3.2",
+    "mssql-python>=1.13.0",
+    "azure-identity>=1.25.3",
 ]
 
 [tool.uv]

@@ -31,8 +31,8 @@ Time-weighted quantities (queue length, WIP) are integrated over time, not
 averaged over customers. Utilization and throughput use Cmax as the
 denominator; `horizon` is also exported so a dashboard can renormalise.
 
-Usage:
-    python BrewLine.py --reps 50 --out brewline_results.json
+Usage (from the repo root):
+    python brewline/BrewLine.py --reps 50 --out data/brewline_results.json
 """
 
 from __future__ import annotations
@@ -419,7 +419,7 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--reps", type=int, default=50,
                    help="number of independent replications")
     p.add_argument("--seed", type=int, default=42, help="master seed")
-    p.add_argument("--out", default="brewline_results.json",
+    p.add_argument("--out", default="data/brewline_results.json",
                    help="path for the exported JSON")
     p.add_argument("--verbose", action="store_true",
                    help="print an event trace for the first replication")
@@ -438,8 +438,18 @@ def main() -> None:
         verbose=args.verbose,
     )
 
+    rounded = _round(results)
     with open(args.out, "w") as f:
-        json.dump(_round(results), f, indent=2)
+        json.dump(rounded, f, indent=2)
+
+    try:
+        from search_index import CONFIGURED, index_results
+
+        if CONFIGURED:
+            count = index_results(rounded)
+            print(f"Indexed {count} chunks into the search index.")
+    except Exception as exc:  # best-effort: never let indexing break the CLI
+        print(f"(search index update skipped: {exc})")
 
     cfg = results["config"]
     s = results["summary"]

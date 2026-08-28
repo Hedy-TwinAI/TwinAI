@@ -6,4 +6,4 @@ __pycache__
 dashboard/node_modules
 dashboard/dist
 *.mov
-brewline_results.json
+data/brewline_results.json

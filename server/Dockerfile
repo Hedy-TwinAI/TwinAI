@@ -5,7 +5,7 @@ WORKDIR /app
 COPY pyproject.toml uv.lock ./
 RUN uv sync --frozen --no-dev
 
-COPY BrewLine.py ./
+COPY brewline/ ./brewline/
 COPY server/main.py ./server/main.py
 
 EXPOSE 8000
