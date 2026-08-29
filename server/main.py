@@ -17,6 +17,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from azure.core.credentials import AzureKeyCredential
 from azure.core.exceptions import AzureError
+from azure.monitor.opentelemetry import configure_azure_monitor
 from azure.search.documents import SearchClient
 from azure.search.documents.models import VectorizedQuery
 from dotenv import load_dotenv
@@ -25,6 +26,7 @@ from mcp import ClientSession
 from mcp.client.streamable_http import streamable_http_client
 from mcp.shared._httpx_utils import create_mcp_http_client
 from openai import APIError, OpenAI
+from opentelemetry.instrumentation.flask import FlaskInstrumentor
 from pydantic import BaseModel, Field, ValidationError
 
 from brewline.BrewLine import _round, run_experiment
@@ -32,7 +34,21 @@ from brewline.search_index import VOYAGE_API_KEY, embed_query
 
 load_dotenv()
 
+# Leave unset locally to skip telemetry; set in Container Apps to send
+# request/dependency/exception telemetry to Application Insights.
+if os.environ.get("APPLICATIONINSIGHTS_CONNECTION_STRING"):
+    configure_azure_monitor()
+
 app = Flask(__name__)
+
+if os.environ.get("APPLICATIONINSIGHTS_CONNECTION_STRING"):
+    # configure_azure_monitor()'s automatic instrumentation patches Flask at
+    # the class level (Flask.wsgi_app) via an entry-point scan, which is a
+    # silent no-op against this Flask/Python combo -- no error, no request
+    # telemetry either. instrument_app() patches this instance directly and
+    # actually works, so call it explicitly instead of relying on the
+    # automatic path.
+    FlaskInstrumentor().instrument_app(app)
 
 DEFAULT_ARRIVAL_RATE = float(os.environ.get("BREWLINE_ARRIVAL_RATE", 0.5))
 DEFAULT_NUM_BARISTAS = int(os.environ.get("BREWLINE_NUM_BARISTAS", 2))

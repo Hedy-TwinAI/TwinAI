@@ -4,6 +4,7 @@ version = "0.1.0"
 description = "SimPy discrete-event simulation models (BrewLine coffee-bar digital twin)"
 requires-python = ">=3.11"
 dependencies = [
+    "azure-monitor-opentelemetry>=1.6.0",
     "azure-search-documents>=11.4.0",
     "flask>=3.1.2",
     "gunicorn>=23.0.0",

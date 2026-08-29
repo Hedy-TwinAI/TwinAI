@@ -25,6 +25,7 @@ import os
 import sys
 from pathlib import Path
 
+from azure.monitor.opentelemetry import configure_azure_monitor
 from mcp.server.fastmcp import FastMCP
 from pydantic import Field
 from starlette.responses import JSONResponse
@@ -32,6 +33,11 @@ from starlette.responses import JSONResponse
 from brewline import sql_source
 from brewline.BrewLine import _round, run_experiment
 from brewline.search_index import CONFIGURED, chunk_results, index_results
+
+# Leave unset locally to skip telemetry; set in Container Apps to send
+# logs/dependency telemetry to Application Insights.
+if os.environ.get("APPLICATIONINSIGHTS_CONNECTION_STRING"):
+    configure_azure_monitor()
 
 REPO_ROOT = Path(__file__).resolve().parent
 RESULTS_PATH = REPO_ROOT / "data" / "brewline_results.json"
