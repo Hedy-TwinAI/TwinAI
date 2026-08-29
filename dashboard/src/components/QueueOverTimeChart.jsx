@@ -8,6 +8,8 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import "./ChartTooltip.css";
+import "./QueueOverTimeChart.css";
 
 const SERIES = [
   { key: "queue_len", label: "Queue length", color: "var(--series-queue)" },
@@ -16,13 +18,10 @@ const SERIES = [
 
 function renderLegend() {
   return (
-    <div className="flex gap-4 pb-2 text-xs text-[var(--text-secondary)]">
+    <div className="queue-chart__legend">
       {SERIES.map((s) => (
-        <span key={s.key} className="flex items-center gap-1.5">
-          <span
-            className="inline-block h-2 w-2 rounded-full"
-            style={{ background: s.color }}
-          />
+        <span key={s.key} className="queue-chart__legend-item">
+          <span className="queue-chart__legend-swatch" style={{ background: s.color }} />
           {s.label}
         </span>
       ))}
@@ -33,10 +32,12 @@ function renderLegend() {
 function ChartTooltip({ active, payload, label }) {
   if (!active || !payload?.length) return null;
   return (
-    <div className="rounded-md border border-[var(--border)] bg-[var(--surface-raised)] px-3 py-2 text-xs text-[var(--text-secondary)]">
-      <div className="mb-1 text-[var(--text-muted)]">t = {label?.toFixed(1)} min</div>
+    <div className="chart-tooltip">
+      <div className="chart-tooltip__muted queue-chart__tooltip-label">
+        t = {label?.toFixed(1)} min
+      </div>
       {payload.map((p) => (
-        <div key={p.dataKey} className="text-[var(--text-primary)]">
+        <div key={p.dataKey} className="chart-tooltip__primary">
           {SERIES.find((s) => s.key === p.dataKey)?.label}: {p.value}
         </div>
       ))}
@@ -47,10 +48,8 @@ function ChartTooltip({ active, payload, label }) {
 export default function QueueOverTimeChart({ data, playheadT }) {
   if (!data || data.length === 0) return null;
   return (
-    <div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-4">
-      <h3 className="mb-1 text-sm font-medium text-[var(--text-primary)]">
-        Queue length &amp; WIP over time
-      </h3>
+    <div className="queue-chart">
+      <h3 className="queue-chart__title">Queue length &amp; WIP over time</h3>
       {renderLegend()}
       <ResponsiveContainer width="100%" height={260}>
         <AreaChart data={data} margin={{ top: 4, right: 12, bottom: 0, left: -12 }}>

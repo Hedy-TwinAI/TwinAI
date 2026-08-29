@@ -1,3 +1,5 @@
+import "./PlaybackControls.css";
+
 export default function PlaybackControls({
   isPlaying,
   onPlay,
@@ -10,13 +12,9 @@ export default function PlaybackControls({
   if (!length) return null;
 
   return (
-    <div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-4">
-      <div className="flex items-center gap-4">
-        <button
-          type="button"
-          onClick={isPlaying ? onPause : onPlay}
-          className="rounded-md bg-[var(--series-queue)] px-4 py-1.5 text-sm font-medium text-white"
-        >
+    <div className="playback-controls">
+      <div className="playback-controls__row">
+        <button type="button" onClick={isPlaying ? onPause : onPlay} className="playback-controls__play-btn">
           {isPlaying ? "Pause" : "Play"}
         </button>
         <input
@@ -26,10 +24,10 @@ export default function PlaybackControls({
           step={1}
           value={currentIndex}
           onChange={(e) => onSeek(Number(e.target.value))}
-          className="flex-1 accent-[var(--series-queue)]"
+          className="playback-controls__range"
         />
         {currentPoint && (
-          <div className="whitespace-nowrap text-xs text-[var(--text-secondary)]">
+          <div className="playback-controls__info">
             t={currentPoint.t.toFixed(1)}m · queue {currentPoint.queue_len} · wip{" "}
             {currentPoint.wip} · busy{" "}
             {currentPoint.busy.filter(Boolean).length}/{currentPoint.busy.length}

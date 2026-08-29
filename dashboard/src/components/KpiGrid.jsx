@@ -1,3 +1,4 @@
+import "./KpiGrid.css";
 import KpiCard from "./KpiCard";
 
 const CARDS = [
@@ -10,7 +11,7 @@ const CARDS = [
 export default function KpiGrid({ summary }) {
   if (!summary) return null;
   return (
-    <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+    <div className="kpi-grid">
       {CARDS.map(({ key, label, unit }) => (
         <KpiCard key={key} label={label} value={summary[key]?.mean} unit={unit} ci={summary[key]} />
       ))}

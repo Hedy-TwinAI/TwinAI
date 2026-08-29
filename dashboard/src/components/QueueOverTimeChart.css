@@ -1,0 +1,40 @@
+.queue-chart {
+  border-radius: 0.5rem;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: 1rem;
+}
+
+.queue-chart__title {
+  margin-bottom: 0.25rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.queue-chart__legend {
+  display: flex;
+  gap: 1rem;
+  padding-bottom: 0.5rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: var(--text-secondary);
+}
+
+.queue-chart__legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.queue-chart__legend-swatch {
+  display: inline-block;
+  height: 0.5rem;
+  width: 0.5rem;
+  border-radius: 9999px;
+}
+
+.queue-chart__tooltip-label {
+  margin-bottom: 0.25rem;
+}

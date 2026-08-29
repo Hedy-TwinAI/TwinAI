@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import "./BrewLineScene.css";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { clone as cloneSkeleton } from "three/examples/jsm/utils/SkeletonUtils.js";
@@ -269,11 +270,9 @@ export default function BrewLineScene({ trace, currentTime, numBaristas, resetKe
   }, [trace, numBaristas, resetKey, maxConcurrency]);
 
   return (
-    <div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-4">
-      <h3 className="mb-1 text-sm font-medium text-[var(--text-primary)]">
-        BrewLine digital twin
-      </h3>
-      <div ref={containerRef} className="h-[360px] w-full overflow-hidden rounded-md" />
+    <div className="brewline-scene">
+      <h3 className="brewline-scene__title">BrewLine digital twin</h3>
+      <div ref={containerRef} className="brewline-scene__viewport" />
     </div>
   );
 }

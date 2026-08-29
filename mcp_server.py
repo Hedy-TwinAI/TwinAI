@@ -1,25 +1,33 @@
 """MCP server exposing the BrewLine coffee-shop digital twin.
 
 Tools:
-    read_results       read data/brewline_results.json
-    edit_inputs        re-run the simulation with new inputs, overwriting
-                        data/brewline_results.json (and reindexing it for
-                        RAG, same as brewline/BrewLine.py's CLI)
-    summarize_results   a concise, human-readable summary of the results
     list_sql_tables     list tables in the Azure SQL database
     query_sql           run a read-only SELECT against the Azure SQL database
 
-Run:
+Run (stdio, for local MCP clients like Claude Code -- see .mcp.json):
     uv run python mcp_server.py
+
+Run (HTTP, externally reachable -- e.g. for server/main.py's assistant
+endpoint, or any remote MCP client):
+    MCP_TRANSPORT=streamable-http MCP_HOST=0.0.0.0 MCP_PORT=8765 \
+        MCP_AUTH_TOKEN=<shared-secret> uv run python mcp_server.py
+
+MCP_AUTH_TOKEN gates the HTTP transport with a bearer token (checked against
+the `Authorization: Bearer <token>` header) -- set it whenever MCP_HOST is
+reachable from outside localhost, since query_sql otherwise lets anyone who
+can reach the port run arbitrary read-only SELECTs against the database.
 """
 
 from __future__ import annotations
 
 import json
+import os
+import sys
 from pathlib import Path
 
 from mcp.server.fastmcp import FastMCP
 from pydantic import Field
+from starlette.responses import JSONResponse
 
 from brewline import sql_source
 from brewline.BrewLine import _round, run_experiment
@@ -27,6 +35,10 @@ from brewline.search_index import CONFIGURED, chunk_results, index_results
 
 REPO_ROOT = Path(__file__).resolve().parent
 RESULTS_PATH = REPO_ROOT / "data" / "brewline_results.json"
+
+MCP_HOST = os.environ.get("MCP_HOST", "127.0.0.1")
+MCP_PORT = int(os.environ.get("MCP_PORT", "8765"))
+MCP_AUTH_TOKEN = os.environ.get("MCP_AUTH_TOKEN", "")
 
 DEFAULT_INPUTS = {
     "arrival_rate": 0.5,
@@ -37,7 +49,7 @@ DEFAULT_INPUTS = {
     "seed": 42,
 }
 
-mcp = FastMCP("BrewLine", log_level="ERROR")
+mcp = FastMCP("BrewLine", log_level="ERROR", host=MCP_HOST, port=MCP_PORT)
 
 
 def _load_results(path: str) -> dict:
@@ -59,74 +71,6 @@ def _current_inputs() -> dict:
         "reps": cfg["replications"],
         "seed": cfg["master_seed"],
     }
-
-
-@mcp.tool(
-    name="read_results",
-    description=(
-        "Read data/brewline_results.json (config, KPI summary, per-barista "
-        "utilization, per-replication data, and the Little's-law validation "
-        "check) and return it as JSON."
-    ),
-)
-def read_results(
-    path: str = Field(default=str(RESULTS_PATH), description="Path to the results file"),
-) -> dict:
-    return _load_results(path)
-
-
-@mcp.tool(
-    name="edit_inputs",
-    description=(
-        "Re-run the BrewLine simulation with new inputs, overwriting "
-        "data/brewline_results.json. Any input left unset keeps its current "
-        "value from the existing results file (or BrewLine's default if no "
-        "results file exists yet)."
-    ),
-)
-def edit_inputs(
-    arrival_rate: float | None = Field(default=None, gt=0, description="Customers per minute"),
-    num_baristas: int | None = Field(default=None, ge=1, description="Number of baristas"),
-    mean_service_time: float | None = Field(
-        default=None, gt=0, description="Average minutes per customer"
-    ),
-    horizon: float | None = Field(
-        default=None, gt=0, description="Minutes during which customers arrive"
-    ),
-    reps: int | None = Field(default=None, ge=1, description="Number of independent replications"),
-    seed: int | None = Field(default=None, description="Master random seed"),
-) -> dict:
-    current = _current_inputs()
-    inputs = {
-        "arrival_rate": arrival_rate if arrival_rate is not None else current["arrival_rate"],
-        "num_baristas": num_baristas if num_baristas is not None else current["num_baristas"],
-        "mean_service_time": (
-            mean_service_time if mean_service_time is not None else current["mean_service_time"]
-        ),
-        "horizon": horizon if horizon is not None else current["horizon"],
-        "reps": reps if reps is not None else current["reps"],
-        "seed": seed if seed is not None else current["seed"],
-    }
-
-    results = run_experiment(**inputs)
-    rounded = _round(results)
-    RESULTS_PATH.write_text(json.dumps(rounded, indent=2))
-
-    indexed_chunks = index_results(rounded) if CONFIGURED else 0
-
-    return {"config": rounded["config"], "indexed_chunks": indexed_chunks}
-
-
-@mcp.tool(
-    name="summarize_results",
-    description="Return a concise, human-readable summary of data/brewline_results.json's config and KPIs.",
-)
-def summarize_results(
-    path: str = Field(default=str(RESULTS_PATH), description="Path to the results file"),
-) -> str:
-    results = _load_results(path)
-    chunks = chunk_results(results)
-    return "\n".join(f"{title}: {content}" for title, content in chunks)
 
 
 @mcp.tool(
@@ -152,5 +96,47 @@ def query_sql(
     return sql_source.run_query(sql, max_rows=max_rows)
 
 
+class _BearerAuthMiddleware:
+    """Minimal ASGI middleware requiring `Authorization: Bearer <token>`.
+
+    FastMCP's own auth support assumes a full OAuth resource-server setup
+    (issuer URL, protected-resource metadata, ...), which is overkill for
+    gating a single-tenant HTTP deployment with one shared secret -- so this
+    wraps the streamable-HTTP app directly instead.
+    """
+
+    def __init__(self, app, token: str) -> None:
+        self._app = app
+        self._token = token
+
+    async def __call__(self, scope, receive, send) -> None:
+        if scope["type"] != "http":
+            await self._app(scope, receive, send)
+            return
+        headers = dict(scope.get("headers") or [])
+        presented = headers.get(b"authorization", b"").decode("latin-1")
+        if presented != f"Bearer {self._token}":
+            response = JSONResponse({"error": "unauthorized"}, status_code=401)
+            await response(scope, receive, send)
+            return
+        await self._app(scope, receive, send)
+
+
 if __name__ == "__main__":
-    mcp.run(transport="stdio")
+    transport = os.environ.get("MCP_TRANSPORT", "stdio")
+    if transport == "stdio":
+        mcp.run(transport="stdio")
+    else:
+        import uvicorn
+
+        app = mcp.streamable_http_app()
+        if MCP_AUTH_TOKEN:
+            app = _BearerAuthMiddleware(app, MCP_AUTH_TOKEN)
+        elif MCP_HOST not in ("127.0.0.1", "localhost", "::1"):
+            print(
+                f"WARNING: MCP_HOST={MCP_HOST!r} but MCP_AUTH_TOKEN is unset -- "
+                "this MCP server (including query_sql) is reachable, unauthenticated, "
+                "by anyone who can reach this host/port.",
+                file=sys.stderr,
+            )
+        uvicorn.run(app, host=MCP_HOST, port=MCP_PORT, log_level="info")

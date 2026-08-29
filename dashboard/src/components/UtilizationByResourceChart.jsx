@@ -8,15 +8,17 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import "./ChartTooltip.css";
+import "./UtilizationByResourceChart.css";
 
 function ChartTooltip({ active, payload }) {
   if (!active || !payload?.length) return null;
   const { name, mean, ci95_low, ci95_high } = payload[0].payload;
   return (
-    <div className="rounded-md border border-[var(--border)] bg-[var(--surface-raised)] px-3 py-2 text-xs text-[var(--text-secondary)]">
-      <div className="text-[var(--text-primary)]">{name}</div>
+    <div className="chart-tooltip">
+      <div className="chart-tooltip__primary">{name}</div>
       <div>utilization: {(mean * 100).toFixed(1)}%</div>
-      <div className="text-[var(--text-muted)]">
+      <div className="chart-tooltip__muted">
         95% CI [{(ci95_low * 100).toFixed(1)}%, {(ci95_high * 100).toFixed(1)}%]
       </div>
     </div>
@@ -31,10 +33,8 @@ export default function UtilizationByResourceChart({ resourceKpis }) {
   }));
 
   return (
-    <div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-4">
-      <h3 className="mb-3 text-sm font-medium text-[var(--text-primary)]">
-        Utilization by resource
-      </h3>
+    <div className="utilization-chart">
+      <h3 className="utilization-chart__title">Utilization by resource</h3>
       <ResponsiveContainer width="100%" height={260}>
         <BarChart data={data} margin={{ top: 4, right: 12, bottom: 0, left: -12 }}>
           <CartesianGrid stroke="var(--gridline)" vertical={false} />

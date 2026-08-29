@@ -1,3 +1,5 @@
+import "./ControlPanel.css";
+
 const FIELDS = [
   { key: "arrival_rate", label: "Arrival rate", unit: "customers/min", min: 0.05, max: 5, step: 0.05 },
   { key: "num_baristas", label: "Baristas", unit: "servers", min: 1, max: 10, step: 1 },
@@ -5,19 +7,29 @@ const FIELDS = [
   { key: "horizon", label: "Horizon", unit: "min", min: 60, max: 1440, step: 30 },
 ];
 
-export default function ControlPanel({ knobs, onChange, isLoading, error }) {
+export default function ControlPanel({ knobs, onChange, onRun, isLoading, error }) {
   return (
-    <div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-4">
-      <div className="mb-3 flex items-center justify-between">
-        <h3 className="text-sm font-medium text-[var(--text-primary)]">Simulation inputs</h3>
-        {isLoading && <span className="text-xs text-[var(--text-muted)]">recomputing…</span>}
+    <div className="control-panel">
+      <div className="control-panel__header">
+        <h3 className="control-panel__title">Simulation inputs</h3>
+        <div className="control-panel__actions">
+          {isLoading && <span className="control-panel__status">running…</span>}
+          <button
+            type="button"
+            onClick={onRun}
+            disabled={isLoading}
+            className="control-panel__run-btn"
+          >
+            Run simulation
+          </button>
+        </div>
       </div>
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="control-panel__fields">
         {FIELDS.map(({ key, label, unit, min, max, step }) => (
-          <label key={key} className="text-xs text-[var(--text-secondary)]">
-            <div className="mb-1 flex items-baseline justify-between">
+          <label key={key} className="control-panel__field">
+            <div className="control-panel__field-header">
               <span>{label}</span>
-              <span className="text-[var(--text-muted)]">
+              <span className="control-panel__field-value">
                 {knobs[key]} {unit}
               </span>
             </div>
@@ -30,12 +42,12 @@ export default function ControlPanel({ knobs, onChange, isLoading, error }) {
               onChange={(e) =>
                 onChange({ ...knobs, [key]: Number(e.target.value) })
               }
-              className="w-full accent-[var(--series-queue)]"
+              className="control-panel__range"
             />
           </label>
         ))}
       </div>
-      {error && <div className="mt-3 text-xs text-[var(--status-critical)]">{error}</div>}
+      {error && <div className="control-panel__error">{error}</div>}
     </div>
   );
 }

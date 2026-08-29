@@ -1,0 +1,21 @@
+.brewline-scene {
+  border-radius: 0.5rem;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: 1rem;
+}
+
+.brewline-scene__title {
+  margin-bottom: 0.25rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.brewline-scene__viewport {
+  height: 360px;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 0.375rem;
+}

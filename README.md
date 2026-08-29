@@ -36,7 +36,7 @@ brewline/                core Python package
 server/                  Flask backend
   main.py                   wraps BrewLine as a JSON API + /api/assistant
   Dockerfile
-mcp_server.py            MCP server: read/edit/summarize results, query Azure SQL
+mcp_server.py            MCP server: read/summarize results, query Azure SQL (stdio or HTTP)
 scripts/build_search_index.py   manual reindex of an existing results file
 data/brewline_results.json   example output of a standalone BrewLine.py run
 archive/simulation.py    superseded early draft, kept for reference
@@ -76,17 +76,42 @@ the defaults. `docker compose` picks up the same file automatically.
 
 ### AI assistant (`/api/assistant`)
 
-A `POST /api/assistant` endpoint answers questions about the simulation,
-grounded in retrieved data from the most recently generated
-`data/brewline_results.json` (small RAG demo: config, per-KPI stats,
-per-barista utilization, and the Little's-law validation check, each as a
-separate indexed chunk) plus optional live simulation context passed in the
-request body. It's disabled (returns `503`) until configured:
+A `POST /api/assistant` endpoint lets visitors ask gpt-4o questions about the
+simulation. It grounds its answers two ways:
+
+- **Live database access, via the MCP server** — when `MCP_SERVER_URL` is
+  set, the endpoint connects to `mcp_server.py` as an MCP client and gives
+  gpt-4o its tools (`query_sql`, `list_sql_tables`, `read_results`,
+  `summarize_results`) as function-calling tools. For a question like "how
+  many runs used 3 baristas?" or "what was the average wait time in the
+  latest run?", the model issues its own read-only `SELECT`s against the
+  historic runs in Azure SQL and answers from the real result — see
+  [MCP server](#mcp-server) below for how to stand that server up.
+- **RAG over the most recently generated results file** — retrieved chunks
+  of `data/brewline_results.json` (config, per-KPI stats, per-barista
+  utilization, the Little's-law check), plus optional live simulation
+  context passed in the request body. Used whenever `MCP_SERVER_URL` isn't
+  set, or as extra context when it is.
+
+The endpoint is disabled (returns `503`) until the model itself is
+configured:
 
 ```
 AZURE_AI_FOUNDRY_ENDPOINT=          # https://<resource>.openai.azure.com/openai/v1
 AZURE_AI_FOUNDRY_API_KEY=
 AZURE_AI_FOUNDRY_MODEL=             # chat deployment name (e.g. gpt-4o)
+```
+
+Database tool-calling (optional — see [MCP server](#mcp-server)):
+
+```
+MCP_SERVER_URL=                     # e.g. http://mcp:8765/mcp under docker compose
+MCP_AUTH_TOKEN=                     # must match the MCP server's own MCP_AUTH_TOKEN
+```
+
+RAG over the results file (optional):
+
+```
 VOYAGE_API_KEY=                     # https://dash.voyageai.com/api-keys
 VOYAGE_MODEL=voyage-3               # embedding model
 AZURE_SEARCH_ENDPOINT=
@@ -103,9 +128,9 @@ no separate step needed. To reindex an existing file by hand instead:
 uv run python scripts/build_search_index.py [path/to/results.json]
 ```
 
-Retrieval degrades gracefully: if search/embeddings aren't configured (or a
-call fails), the assistant still answers using only the question and any
-`context` passed in — RAG is a best-effort enhancement, not a precondition.
+Both groundings degrade gracefully: if the MCP server is unreachable, or
+search/embeddings aren't configured, the assistant still answers using only
+the question and any `context` passed in — neither is a precondition.
 
 ## Running the dashboard
 
@@ -134,9 +159,12 @@ build).
 docker compose up --build
 ```
 
-This builds and starts both services: the Flask backend
-(`http://localhost:8000`) and the dashboard, served by nginx and proxying
-`/api` to the backend (`http://localhost:8080`). Open `http://localhost:8080`.
+This builds and starts three services: the MCP server over streamable-http
+(`http://localhost:8765/mcp`, see [MCP server](#mcp-server)), the Flask
+backend (`http://localhost:8000`, wired to that MCP server automatically),
+and the dashboard, served by nginx and proxying `/api` to the backend
+(`http://localhost:8080`). Open `http://localhost:8080`. Set `MCP_AUTH_TOKEN`
+in `.env` before exposing this beyond your own machine.
 
 ## Running the simulation standalone
 
@@ -156,20 +184,31 @@ uv run python .claude/skills/simpy-scaffold/scripts/validate_results.py data/bre
 
 ## MCP server
 
-`mcp_server.py` exposes the simulation over the Model Context Protocol
-(stdio transport), for use with Claude Desktop or any other MCP host:
+`mcp_server.py` exposes the simulation over the Model Context Protocol. Two
+transports:
 
-```bash
-uv run python mcp_server.py
-```
+- **stdio** (default) — for local MCP hosts (Claude Code, Claude Desktop)
+  that spawn the server as a subprocess. Not reachable over the network.
+- **streamable-http** — an actual network server, for `/api/assistant`
+  above and for any remote MCP client (Claude.ai's "Connect apps",
+  ChatGPT's connectors, etc.):
 
-Five tools:
+  ```bash
+  MCP_TRANSPORT=streamable-http MCP_HOST=0.0.0.0 MCP_PORT=8765 \
+      MCP_AUTH_TOKEN=$(openssl rand -hex 32) uv run python mcp_server.py
+  ```
+
+  `MCP_AUTH_TOKEN` gates every request behind `Authorization: Bearer
+  <token>` — set it whenever `MCP_HOST` is reachable from outside
+  localhost, since `query_sql` otherwise lets anyone who can reach the port
+  run arbitrary read-only `SELECT`s against the database. `docker compose
+  up` runs this transport automatically as the `mcp` service, reachable at
+  `localhost:8765` on the host and `http://mcp:8765/mcp` from the `backend`
+  service.
+
+Four tools:
 
 - `read_results` — read `data/brewline_results.json` as JSON
-- `edit_inputs` — re-run the simulation with new inputs (arrival rate,
-  baristas, service time, horizon, reps, seed), overwriting
-  `data/brewline_results.json`; any input left unset keeps its current
-  value. Reindexes for RAG same as `BrewLine.py`'s CLI, if configured.
 - `summarize_results` — a concise, human-readable summary of the config and
   KPIs (same chunking as the search index)
 - `list_sql_tables` / `query_sql` — read-only access to an Azure SQL
@@ -193,6 +232,26 @@ server's firewall also needs a rule allowing your client IP:
 az sql server firewall-rule create --server <name> --resource-group <rg> \
   --name allow-my-ip --start-ip-address <ip> --end-ip-address <ip>
 ```
+
+### Deploying to Azure Container Apps
+
+`scripts/deploy_mcp.sh` deploys the streamable-http transport as a third
+Container App (`mcp`) alongside the existing `backend`/`dashboard` apps in
+`brewline-rg`, sharing their environment (`brewline-env`) and registry
+(`brewlineregistry`):
+
+```bash
+./scripts/deploy_mcp.sh
+```
+
+It builds the image via `az acr build` (no local Docker needed), creates the
+app with a system-assigned managed identity for both ACR pull and
+`AZURE_SQL_SERVER`/`AZURE_SQL_DATABASE` access (Entra ID auth resolves via
+that identity in Azure the same way it resolves via `az login` locally —
+see above), and generates an `MCP_AUTH_TOKEN`. It then prints the one-time
+SQL grant for the new identity and the command to wire `backend`'s
+`MCP_SERVER_URL`/`MCP_AUTH_TOKEN` at it, since those touch the already-live
+`backend` app and are left as an explicit step rather than done silently.
 
 Example host config (Claude Desktop's `claude_desktop_config.json`):
 

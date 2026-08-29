@@ -451,6 +451,16 @@ def main() -> None:
     except Exception as exc:  # best-effort: never let indexing break the CLI
         print(f"(search index update skipped: {exc})")
 
+    try:
+        from sql_source import CONFIGURED as SQL_CONFIGURED
+        from sql_source import insert_run
+
+        if SQL_CONFIGURED:
+            input_id = insert_run(rounded)
+            print(f"Inserted run {input_id} into Azure SQL (Inputs.InputID={input_id}).")
+    except Exception as exc:  # best-effort: never let the SQL write break the CLI
+        print(f"(SQL write skipped: {exc})")
+
     cfg = results["config"]
     s = results["summary"]
     print(f"BrewLine: {cfg['replications']} replications, "
